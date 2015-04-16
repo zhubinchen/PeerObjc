@@ -15,21 +15,17 @@
 
 @optional
 
-- (void)dataConnectionDidOpen:(DataConnection*)connection;
+- (void)dataConnectionDidOpen:(DataConnection *)connection;
 
-- (void)dataConnectionDidClosed:(DataConnection*)connection;
+- (void)dataConnectionDidClosed:(DataConnection *)connection;
 
-- (void)dataConnection:(DataConnection*)connection DidRecievedData:(NSData *)data;
+- (void)dataConnection:(DataConnection *)connection DidRecievedData:(NSData *)data;
 
-- (void)dataConnection:(DataConnection *)connection DidRecievedMessage:(NSString*)msg;
-
-- (void)dataConnectionRecieveCompleted:(DataConnection *)connection;
+- (void)dataConnection:(DataConnection *)connection DidRecievedMessage:(NSDictionary*)msg;
 
 @end
 
 @interface DataConnection : Connection
-
-@property (nonatomic,assign) BOOL keepOriginalData; 
 
 @property (nonatomic,strong,readonly) NSData *recivedData;
 
@@ -37,10 +33,8 @@
 
 - (void)initializeDataChannel:(RTCDataChannel*)dataChannel;
 
-- (void)sendMessage:(NSString*)msg;
+- (void)sendMessage:(NSDictionary*)msg;
 
-- (void)sendData:(NSData*)data;
-
-- (id)init __attribute__((unavailable("init is not a supported initializer for this class.")));
+- (BOOL)sendData:(NSData *)data;
 
 @end

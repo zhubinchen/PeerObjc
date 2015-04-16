@@ -26,20 +26,17 @@
     RTCPeerConnectionFactory *_factory;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame AspectRatio:(CGSize)ratio
+- (instancetype)initWithFrame:(CGRect)frame Ratio:(CGSize)ratio
 {
     if (self = [super initWithFrame:frame]) {
+        _ratio= ratio;
         _videoView = [[RTCEAGLVideoView alloc]initWithFrame:self.bounds];
         [self addSubview:_videoView];
         _videoView.delegate = self;
         
-        if(ratio.height == 0){
-            ratio = CGSizeMake(4, 3);
-        }
-        
         _factory = [[RTCPeerConnectionFactory alloc]init];
 
-        frame = AVMakeRectWithAspectRatioInsideRect(ratio, _videoView.bounds);
+        frame = AVMakeRectWithAspectRatioInsideRect(_ratio, _videoView.bounds);
         _videoView.frame = frame;
     }
     
@@ -85,6 +82,24 @@
     return localStream;
 }
 
+- (void)setBounds:(CGRect)bounds
+{
+    [super setBounds:bounds];
+    _videoView.bounds = bounds;
+}
+
+- (void)setCenter:(CGPoint)center
+{
+    [super setCenter:center];
+    _videoView.center = center;
+}
+
+- (void)setRatio:(CGSize)ratio
+{
+    _ratio = ratio;
+    _videoView.frame = AVMakeRectWithAspectRatioInsideRect(ratio, _videoView.bounds);
+
+}
 - (void)videoView:(RTCEAGLVideoView *)videoView didChangeVideoSize:(CGSize)size
 {
     CGRect frame = AVMakeRectWithAspectRatioInsideRect(size, videoView.bounds);

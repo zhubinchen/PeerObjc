@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+
 @class Peer;
 
+
+/**
+ *  不要试着实例化这个类。请用他的子类
+ */
 @interface Connection : NSObject
 
 @property (nonatomic,strong) NSString *type;
@@ -31,8 +36,6 @@
 @property (nonatomic,strong) NSString *metadata;
 
 @property (nonatomic,strong) NSString *dstBrowser;
-
-- (id)init __attribute__((unavailable("init is not a supported initializer for this class.")));
 
 - (instancetype)initWithDstPeerId:(NSString*)dstId AndPeer:(Peer*)peer Options:(NSDictionary*)options;
 

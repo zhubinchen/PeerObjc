@@ -21,7 +21,8 @@
         _label = options[@"label"];
         _metadata = options[@"metadata"];
         _serialization = @"binary";
-        _reliable = NO;
+        _reliable = YES;
+        self.id = self.id == nil ? [self randStringWithMaxLenght:15] : self.id;
     }
     
     return self;
@@ -35,6 +36,7 @@
 - (void)close
 {
     _open = NO;
+    NSLog(@"%@ closed",self);
 }
 
 - (NSString *)randStringWithMaxLenght:(NSInteger)len
@@ -54,7 +56,12 @@
 
 - (void)dealloc
 {
-    [self close];
+    NSLog(@"dealloc");
+}
+
+- (NSString*)description
+{
+    return [NSString stringWithFormat:@"<connection:%@,dstPeer:%@>",self.id,self.dstId];
 }
 
 @end

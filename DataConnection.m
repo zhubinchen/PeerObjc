@@ -22,7 +22,6 @@
 @implementation DataConnection
 {
     Negotiator *negotiator;
-    NSMutableData *rData;
     RTCPeerConnection *pc;
 }
 
@@ -30,7 +29,6 @@
 {
     if (self = [super initWithDstPeerId:dstId AndPeer:peer Options:options]) {
         self.type = @"data";
-        self.id = self.id == nil ? @"dc_phks5x29u9885mi" : self.id;
         NSDictionary *config = options[@"_payload"] ? options[@"_payload"] : @{@"originator": @"true"} ;
         negotiator = [[Negotiator alloc]initWithConnection:self];
         pc = [negotiator startPeerConnectionWithOptions:config];
@@ -64,19 +62,22 @@
     NSLog(@"dataChannel OK");
 }
 
-- (void)sendData:(NSData *)data
+- (BOOL)sendData:(NSData *)data
 {
-    NSMutableData *dataToSend = [data mutableCopy];
-    NSString *endSuffix = @"zbc";
-    NSLog(@"%@",[endSuffix dataUsingEncoding:NSUTF8StringEncoding]);
-    [dataToSend appendData:[endSuffix dataUsingEncoding:NSUTF8StringEncoding]];
-    RTCDataBuffer *buffer = [[RTCDataBuffer alloc]initWithData:dataToSend isBinary:YES];
-    [_dataChannel sendData:buffer];
+    if (!self.open) {
+        return NO;
+    }
+    RTCDataBuffer *buffer = [[RTCDataBuffer alloc]initWithData:data isBinary:YES];
+    return [_dataChannel sendData:buffer];
 }
 
-- (void)sendMessage:(NSString *)msg
+- (void)sendMessage:(NSDictionary *)msg
 {
-    RTCDataBuffer *buffer = [[RTCDataBuffer alloc]initWithData:[msg dataUsingEncoding:NSUTF8StringEncoding] isBinary:NO];
+    if (!self.open) {
+        return ;
+    }
+    
+    RTCDataBuffer *buffer = [[RTCDataBuffer alloc]initWithData:[NSJSONSerialization dataWithJSONObject:msg options:0 error:nil] isBinary:NO];
     [_dataChannel sendData:buffer];
 }
 
@@ -86,10 +87,14 @@
 {
     NSLog(@"datachannel state %u",channel.state);
     if (channel.state == kRTCDataChannelStateOpen) {
+        self.open = YES;
         if ([self.delegate respondsToSelector:@selector(dataConnectionDidOpen:)]) {
             [self.delegate dataConnectionDidOpen:self];
         }
-    } else if (channel.state == kRTCDataChannelStateClosed) {
+        return;
+    }
+    self.open = NO;
+    if (channel.state == kRTCDataChannelStateClosed) {
         if ([self.delegate respondsToSelector:@selector(dataConnectionDidClosed:)]) {
             [self.delegate dataConnectionDidClosed:self];
         }
@@ -98,63 +103,30 @@
 
 - (void)channel:(RTCDataChannel *)channel didReceiveMessageWithBuffer:(RTCDataBuffer *)buffer
 {
-    if (rData == nil) {
-        rData = [NSMutableData data];
-    }
-    
-    [rData appendData:buffer.data];
-    
-    _recivedData = rData;
-    
     if (buffer.isBinary) {
     
         if ([self.delegate respondsToSelector:@selector(dataConnection:DidRecievedData:)]) {
             [self.delegate dataConnection:self DidRecievedData:buffer.data];
         }
         
-        NSString *endSuffix = [[NSString alloc]initWithData:[buffer.data subdataWithRange:NSMakeRange(buffer.data.length - 3, 3)] encoding:NSUTF8StringEncoding];
-        
-        NSLog(@"endSuffix:%@",endSuffix);
-        
-        if ([endSuffix isEqualToString:@"zbc"]) {
-            if ([self.delegate respondsToSelector:@selector(dataConnectionRecieveCompleted:)]) {
-                [self.delegate dataConnectionRecieveCompleted:self];
-            }
-        }
-        
     } else {
         
         if ([self.delegate respondsToSelector:@selector(dataConnection:DidRecievedMessage:)]) {
-            [self.delegate dataConnection:self DidRecievedMessage:[[NSString alloc]initWithData:buffer.data encoding:NSUTF8StringEncoding]];
+
+            [self.delegate dataConnection:self DidRecievedMessage:[NSJSONSerialization JSONObjectWithData:buffer.data options:0 error:nil]];
         }
-        
     }
 }
-
-#pragma mark 随机数
-
-- (NSString *)randStringWithMaxLenght:(NSInteger)len
-{
-    NSInteger length = [self randBetween:len max:len];
-    unichar letter[length];
-    for (int i = 0; i < length; i++) {
-        letter[i] = [self randBetween:65 max:90];
-    }
-    return [[[NSString alloc] initWithCharacters:letter length:length] lowercaseString];
-}
-
-- (NSInteger)randBetween:(NSInteger)min max:(NSInteger)max
-{
-    return (random() % (max - min + 1)) + min;
-}
-
 
 - (void)close
 {
     [super close];
 
-    [pc close];
-    
+    if (_dataChannel.state == kRTCDataChannelStateConnecting || _dataChannel.state == kRTCDataChannelStateOpen) {
+        [_dataChannel close];
+    }
+    [_dataChannel close];
+
     if ([self.delegate respondsToSelector:@selector(dataConnectionDidClosed:)]) {
         [self.delegate dataConnectionDidClosed:self];
     }

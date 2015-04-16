@@ -19,11 +19,12 @@
 #import "RTCVideoTrack.h"
 #import "RTCICECandidate.h"
 #import "RTCDataChannel.h"
-#import "Connection.h"
-#import "DataConnection.h"
-#import "MediaConnection.h"
+#import "RTCSessionDescription.h"
+#import "RTCTypes.h"
+#import "RTCEAGLVideoView.h"
 
-@interface Peer () <SRWebSocketDelegate,RTCSessionDescriptionDelegate>
+
+@interface Peer () <SRWebSocketDelegate>
 
 @end
 
@@ -36,6 +37,8 @@
 
 - (instancetype)initWithOptions:(NSDictionary*)options AndId:(NSString*)id
 {
+    NSAssert(options, @"能来个正常的option吗");
+    
     if (self = [super init]) {
         _id = id;
         _path = options[@"path"];
@@ -53,8 +56,7 @@
             _path = @"";
         }
         
-        _opened = NO;
-        _connected = NO;
+        _open = NO;
         
         connections = [[NSMutableDictionary alloc]init];
         
@@ -74,37 +76,23 @@
     return self;
 }
 
-- (DataConnection*)connectToPeer:(NSString *)peerID Options:(NSDictionary *)options
-{
-    DataConnection *d = [[DataConnection alloc]initWithDstPeerId:peerID AndPeer:self Options:options];
-    [self addConnection:d Peer:peerID];
-    return d;
-}
+#pragma mark 必要的初始化准备
 
-- (void)disConnectAllConnections
+- (NSArray*)getIceServersWithUrls:(NSArray*)iceServerUrls
 {
-    [_webSock close];
+    NSMutableArray *servers = [[NSMutableArray alloc] init];
+    for (NSDictionary *ice in iceServerUrls) {
+        NSString *urlStr = [ice objectForKey:@"url"];
+        NSString *user = [ice objectForKey:@"username"];
+        NSString *password = [ice objectForKey:@"credential"];
+        
+        NSURL *stunURL = [NSURL URLWithString:urlStr];
+        RTCICEServer *iceServer = [[RTCICEServer alloc] initWithURI:stunURL
+                                                           username:user password:password];
+        [servers addObject:iceServer];
+    }
     
-    [connections enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [obj enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [obj close];
-        }];
-    }];
-}
-
-- (void)disConnect:(NSString *)connectionId
-{
-    [connections enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [obj enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-  
-            if ([[obj id] isEqualToString:connectionId]) {
-                
-                [obj close];
-                return ;
-            }
-        }];
-
-    }];
+    return servers;
 }
 
 - (void)initializeServerConnection
@@ -128,6 +116,49 @@
     NSLog(@"peerId: %@", _id);
 }
 
+#pragma mark 发起连接
+
+- (DataConnection*)connectToPeer:(NSString *)peerID Options:(NSDictionary *)options
+{
+    if (!_open && !_webSock) {
+        [self initializeServerConnection];
+    }
+    DataConnection *d = [[DataConnection alloc]initWithDstPeerId:peerID AndPeer:self Options:options];
+    [self addConnection:d];
+    return d;
+}
+
+- (MediaConnection *)callPeer:(NSString *)peerID Options:(NSDictionary *)options
+{
+    if (!_open && !_webSock) {
+        [self initializeServerConnection];
+    }
+    
+    MediaConnection *m = [[MediaConnection alloc]initWithDstPeerId:peerID AndPeer:self Options:options];
+    [self addConnection:m];
+    return m;
+}
+
+#pragma mark 断开连接
+
+- (void)disConnectAllConnections
+{
+    [connections enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+
+        for (Connection *conn in obj) {
+            [self disConnect:conn];
+        }
+    }];
+}
+
+- (void)disConnect:(Connection *)connection
+{
+    [connection close];
+    [self removeConnection:connection];
+}
+
+#pragma mark 从socket接收到消息后的第一步消息处理。连接建立后会把消息转给connection
+
 - (void)handleMessage:(NSString*)str
 {
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
@@ -141,13 +172,12 @@
         
         [self drainMessages];
         if (_onOpen){
+            _open = YES;
             _onOpen(_id);
         }
         
     }else if ([@"OFFER" isEqualToString:type]) {
-        
-        connectionId = payload[@"connectionId"];
-        
+                
         Connection *connection = [self getConnectionWithPeerId:dstId ConnectionId:connectionId];
        
         if (connection) {
@@ -165,7 +195,7 @@
                                                                                                @"reliable": payload[@"reliable"]
                                                                                                }];
             
-            [self addConnection:connection Peer:dstId];
+            [self addConnection:connection];
             
         } else if ([payload[@"type"] isEqualToString:@"media"]) {
             connection = [[MediaConnection alloc]initWithDstPeerId:dstId AndPeer:self Options:@{
@@ -175,13 +205,12 @@
                                                                                                @"label": payload[@"label"] == nil ? @"" :payload[@"label"],
                                                                                                }];
             
-            [self addConnection:connection Peer:dstId];
+            [self addConnection:connection];
         }
         
         if (_onConnection){
             _onConnection(connection);
         }
-        
     }
     else {
         Connection *conn = [self getConnectionWithPeerId:dstId ConnectionId:payload[@"connectionId"]];
@@ -189,22 +218,7 @@
     }
 }
 
-- (NSArray*)getIceServersWithUrls:(NSArray*)iceServerUrls
-{
-    NSMutableArray *servers = [[NSMutableArray alloc] init];
-    for (NSDictionary *ice in iceServerUrls) {
-        NSString *urlStr = [ice objectForKey:@"url"];
-        NSString *user = [ice objectForKey:@"username"];
-        NSString *password = [ice objectForKey:@"credential"];
-        
-        NSURL *stunURL = [NSURL URLWithString:urlStr];
-        RTCICEServer *iceServer = [[RTCICEServer alloc] initWithURI:stunURL
-                                                           username:user password:password];
-        [servers addObject:iceServer];
-    }
-    
-    return servers;
-}
+#pragma mark 消息发送
 
 - (void)sendMessage:(NSDictionary *)message
 {
@@ -216,7 +230,7 @@
 
 - (void)drainMessages
 {
-    if (!_connected) {
+    if (!_open) {
         return;
     }
     for (NSDictionary *msg in messageQueue) {
@@ -225,24 +239,29 @@
     messageQueue = [[NSMutableArray alloc] initWithCapacity:10];
 }
 
-- (void)addConnection:(Connection*)connection Peer:(NSString*)peerID
+#pragma mark 连接管理
+
+- (void)addConnection:(Connection*)connection
 {
-    if (connections[peerID] == nil) {
-        [connections setObject:[NSMutableArray array] forKey:peerID];
+    if (connections[connection.dstId] == nil) {
+        [connections setObject:[NSMutableArray array] forKey:connection.dstId];
     }
-    [connections[peerID] addObject:connection];
+    [connections[connection.dstId] addObject:connection];
+}
+
+- (void)removeConnection:(Connection*)connection
+{
+    [connections[connection.dstId] removeObject:connection];
 }
 
 - (Connection*)getConnectionWithPeerId:(NSString*)peerID ConnectionId:(NSString*)id
 {
     NSArray *connArr = connections[peerID];
-//    NSLog(@"get %@",peerID);
     for (Connection *conn in connArr){
         if ([conn.id isEqualToString:id]){
             return conn;
         }
     }
-    
     return nil;
 }
 
@@ -255,8 +274,6 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
 {
-//    NSLog(@"socket recieved Message:");
-//    NSLog(@"\n%@",message);
     [self handleMessage:message];
 }
 
@@ -270,16 +287,18 @@
     NSLog(@"socket closed reason:%@",reason);
 }
 
-#pragma MARK RTCSessionDescriptionDelegate
+#pragma mark 善后
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection didCreateSessionDescription:(RTCSessionDescription *)sdp error:(NSError *)error
+- (void)cleanUp
 {
-    
+    [self disConnectAllConnections];
+    _open = NO;
+//    [_webSock close];
+    _webSock = nil;
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection didSetSessionDescriptionWithError:(NSError *)error
-{
-    
+- (void)dealloc{
+    [self cleanUp];
 }
 
 #pragma MARK 生成随机数而已

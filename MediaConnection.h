@@ -15,6 +15,8 @@
 
 @protocol MediaConnectionDelegate <NSObject>
 
+@optional
+
 - (void)mediaConnectionDidOpen:(MediaConnection*)connection;
 
 - (void)mediaConnectionDidClosed:(MediaConnection*)connection;
@@ -30,7 +32,5 @@
 @property (nonatomic,strong) VideoView *localVideoView;
 
 - (void)recievedRemoteVideoTrack:(RTCVideoTrack*)track;
-
-- (id)init __attribute__((unavailable("init is not a supported initializer for this class.")));
 
 @end

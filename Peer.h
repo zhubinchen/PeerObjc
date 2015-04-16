@@ -7,10 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RTCVideoTrack.h"
-#import "RTCSessionDescription.h"
-#import "RTCTypes.h"
-#import "RTCEAGLVideoView.h"
 #import "SRWebSocket.h"
 #import "DataConnection.h"
 #import "MediaConnection.h"
@@ -40,22 +36,22 @@
 /**
  *  状态标记
  */
-@property(nonatomic, assign) BOOL      connected;
-@property(nonatomic, assign) BOOL      opened;
+@property(nonatomic, assign) BOOL      open;
 
-/**
- *  其他
- */
 @property (nonatomic,strong)     SRWebSocket *webSock;
 
-- (id)init __attribute__((unavailable("init is not a supported initializer for this class.")));
+- (id)init __attribute__((unavailable("not avaliable")));
 
 - (instancetype)initWithOptions:(NSDictionary*)options AndId:(NSString*)id;
 
 - (DataConnection*)connectToPeer:(NSString*)peerID Options:(NSDictionary*)options;
 
+- (MediaConnection*)callPeer:(NSString*)peerID Options:(NSDictionary*)options;
+
 - (void)disConnectAllConnections;
 
-- (void)disConnect:(NSString*) connectionId;
+- (void)disConnect:(Connection*) connection;
+
+- (void)cleanUp;
 
 @end

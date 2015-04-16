@@ -21,7 +21,9 @@ typedef enum : NSUInteger {
 
 @property (nonatomic,assign,readonly) CameraPostion *cameraPostion;
 
-- (instancetype)initWithFrame:(CGRect)frame AspectRatio:(CGSize)ratio;
+@property (nonatomic,assign)CGSize ratio;
+
+- (instancetype)initWithFrame:(CGRect)frame Ratio:(CGSize)ratio;
 
 - (void)renderVideoWithTrack:(RTCVideoTrack*)track;
 

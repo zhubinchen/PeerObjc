@@ -25,11 +25,11 @@
 
 @property (nonatomic,strong) RTCSessionDescription *sdp;
 
-
 @end
 
 @implementation Negotiator
 {
+    BOOL shouldOffer;
     RTCPeerConnection *_peerConnection;
     NSString *sdpType;
     NSString *where;
@@ -41,7 +41,6 @@
     
     if (self = [super init]) {
         _connection = connection;
-        [RTCPeerConnectionFactory initializeSSL];
         _factory = [[RTCPeerConnectionFactory alloc]init];
     }
     
@@ -51,25 +50,44 @@
 - (RTCPeerConnection*)startPeerConnectionWithOptions:(NSDictionary *)options
 {
     if (_peerConnection == nil) {
+        
         NSLog(@"Creating RTCPeerConnection");
         if ([_connection.type isEqualToString:@"data"]) {
             
             _peerConnection = [_factory peerConnectionWithICEServers:_connection.peer.iceServers constraints:[ConstraintsFactory constraintsForDataConnection] delegate:self];
+            
         } else if ([_connection.type isEqualToString:@"media"]){
+            
             _peerConnection = [_factory peerConnectionWithICEServers:_connection.peer.iceServers constraints:[ConstraintsFactory constraintsForMediaConnection] delegate:self];
+            
+            if (![options[@"originator"] isEqualToString:@"true"]) {
+                [_peerConnection addStream:_stream];
+            }
+            
         } else {
-            NSAssert(1, @"connection type is not valid");
+            
+            NSAssert(0, @"connection type is not valid");
         }
+        
     }
     
     if ([options[@"originator"] isEqualToString:@"true"]) {
+        
         if ([_connection.type isEqualToString:@"data"]) {
+            
             RTCDataChannelInit *config = [[RTCDataChannelInit alloc]init];
             config.isOrdered = YES;
             RTCDataChannel *dc = [_peerConnection createDataChannelWithLabel:_connection.label config:config];
             [(DataConnection*)_connection initializeDataChannel:dc];
+            
+        } else if ([_connection.type isEqualToString:@"media"]) {
+            shouldOffer = YES;
+        } else {
+            NSAssert(0, @"connection type is not valid");
         }
+        
     } else {
+        
         [self handelSdp:options[@"sdp"] WithType:@"offer"];
     }
     
@@ -78,19 +96,19 @@
 
 - (void)sendOfferWithSdp:(NSString*)sdp
 {
-    sdp = [sdp stringByReplacingOccurrencesOfString:@"b=AS:30" withString:@"b=AS:5000"];
     NSDictionary *message = @{@"type": @"OFFER",
                               @"src": _connection.peer.id,
                               @"dst": _connection.dstId,
                               @"payload":
                                   @{@"browser": @"Chrome",
                                     @"serialization": _connection.serialization,
-                                    @"reliable":@"false",
+                                    @"reliable":@"true",
                                     @"type": _connection.type,
                                     @"label":_connection.label,
                                     @"connectionId": _connection.id,
                                     @"sdp": @{@"sdp": sdp, @"type": @"offer"}}
                               };
+    
     [self sendMessage:message];
 }
 
@@ -99,7 +117,8 @@
     if (sdp == nil) {
         return;
     }
-    sdp = [sdp stringByReplacingOccurrencesOfString:@"b=AS:30" withString:@"b=AS:5000"];
+    
+    NSLog(@"%@",sdp);
     [self sendMessage:@{@"type": @"ANSWER",
                               @"src": _connection.peer.id,
                               @"dst": _connection.dstId,
@@ -143,8 +162,7 @@
 - (void)sendMessage:(NSDictionary*)msg
 {
     NSData *data = [NSJSONSerialization dataWithJSONObject:msg options:0 error:nil];
-//    NSString *s = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-////    NSLog(@"%@",s);
+
     [_connection.peer.webSock send:data];
 }
 
@@ -154,23 +172,19 @@
 didCreateSessionDescription:(RTCSessionDescription *)sdp
                  error:(NSError *)error {
     if (error) {
-        NSLog(@"%@",error);
-
-        NSLog(@"failed to createSDP");
+        NSLog(@"failed to createSDP,error:%@",error);
         return;
     }
     NSLog(@"created Sdp. Type:%@",sdpType);
     where = @"local";
     _sdp = sdp;
-    NSLog(@"%@",sdp);
     [_peerConnection setLocalDescriptionWithDelegate:self sessionDescription:sdp];
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
 didSetSessionDescriptionWithError:(NSError *)error {
     if (error) {
-        NSLog(@"%@",error);
-        NSLog(@"Failed to set %@Description:%@",where,sdpType);
+        NSLog(@"Failed to set %@Description:%@ Error:%@",where,sdpType,error);
         return;
     }
     
@@ -238,7 +252,9 @@ didSetSessionDescriptionWithError:(NSError *)error {
 {
     NSLog(@"negotiationneeded triggered");
     if (peerConnection.signalingState == RTCSignalingStable) {
-        [self makeOffer];
+        if ([_connection.type isEqualToString:@"data"] || shouldOffer) {
+            [self makeOffer];
+        }
     } else {
         NSLog(@"onnegotiationneeded triggered when not stable. Is another connection being established?");
     }
