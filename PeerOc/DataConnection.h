@@ -1,6 +1,6 @@
 //
 //  DataConnection.h
-//  PeerObjectiveC
+//  PeerObjc
 //
 //  Created by zhubch on 15-3-6.
 //  Copyright (c) 2015年 zhubch. All rights reserved.
@@ -19,9 +19,9 @@
 
 - (void)dataConnectionDidClosed:(DataConnection *)connection;
 
-- (void)dataConnection:(DataConnection *)connection DidRecievedData:(NSData *)data;
+- (void)dataConnection:(DataConnection *)connection didRecievedData:(NSData *)data;
 
-- (void)dataConnection:(DataConnection *)connection DidRecievedMessage:(NSDictionary*)msg;
+- (void)dataConnection:(DataConnection *)connection didRecievedMessage:(NSDictionary*)msg;
 
 @end
 

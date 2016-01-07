@@ -1,6 +1,6 @@
 //
 //  Peer.h
-//  PeerObjectiveC
+//  PeerObjc
 //
 //  Created by zhubch on 15-3-6.
 //  Copyright (c) 2015年 zhubch. All rights reserved.
@@ -36,9 +36,9 @@
 /**
  *  状态标记
  */
-@property(nonatomic, assign) BOOL      open;
+@property(nonatomic, assign) BOOL        open;
 
-@property (nonatomic,strong)     SRWebSocket *webSock;
+@property (nonatomic,strong) SRWebSocket *webSock;
 
 - (id)init __attribute__((unavailable("not avaliable")));
 

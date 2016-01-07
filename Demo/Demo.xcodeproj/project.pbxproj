@@ -23,6 +23,10 @@
 		078573191B6782AB00DFA1FB /* libWebRTC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 078572F31B6782AB00DFA1FB /* libWebRTC.a */; };
 		0785731A1B6782AB00DFA1FB /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0785730F1B6782AB00DFA1FB /* SRWebSocket.m */; };
 		0785731B1B6782AB00DFA1FB /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 078573121B6782AB00DFA1FB /* VideoView.m */; };
+		0786C39D1C3E591500012B3F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C39C1C3E591500012B3F /* libstdc++.tbd */; };
+		0786C39F1C3E596500012B3F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C39E1C3E596500012B3F /* GLKit.framework */; };
+		0786C3A11C3E59E100012B3F /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C3A01C3E59E100012B3F /* libicucore.tbd */; };
+		0786C3E01C3E737800012B3F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C3DF1C3E737800012B3F /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +97,10 @@
 		078573101B6782AB00DFA1FB /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		078573111B6782AB00DFA1FB /* VideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoView.h; sourceTree = "<group>"; };
 		078573121B6782AB00DFA1FB /* VideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoView.m; sourceTree = "<group>"; };
+		0786C39C1C3E591500012B3F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		0786C39E1C3E596500012B3F /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		0786C3A01C3E59E100012B3F /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		0786C3DF1C3E737800012B3F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +108,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0786C3E01C3E737800012B3F /* libsqlite3.tbd in Frameworks */,
+				0786C3A11C3E59E100012B3F /* libicucore.tbd in Frameworks */,
+				0786C39F1C3E596500012B3F /* GLKit.framework in Frameworks */,
+				0786C39D1C3E591500012B3F /* libstdc++.tbd in Frameworks */,
 				078573191B6782AB00DFA1FB /* libWebRTC.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,6 +129,10 @@
 		078572B31B67815500DFA1FB = {
 			isa = PBXGroup;
 			children = (
+				0786C3DF1C3E737800012B3F /* libsqlite3.tbd */,
+				0786C3A01C3E59E100012B3F /* libicucore.tbd */,
+				0786C39E1C3E596500012B3F /* GLKit.framework */,
+				0786C39C1C3E591500012B3F /* libstdc++.tbd */,
 				078572E51B6782AB00DFA1FB /* PeerOc */,
 				078572BE1B67815500DFA1FB /* Demo */,
 				078572D81B67815600DFA1FB /* DemoTests */,
@@ -278,7 +294,7 @@
 		078572B41B67815500DFA1FB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = zhubch;
 				TargetAttributes = {
 					078572BB1B67815500DFA1FB = {
@@ -407,6 +423,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -478,6 +495,7 @@
 					"$(inherited)",
 					/Users/zhubch/Desktop/github/PeerOc/PeerOc/RTC,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "zhubch.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -492,6 +510,7 @@
 					"$(inherited)",
 					/Users/zhubch/Desktop/github/PeerOc/PeerOc/RTC,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "zhubch.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -510,6 +529,7 @@
 				);
 				INFOPLIST_FILE = DemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "zhubch.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};
@@ -525,6 +545,7 @@
 				);
 				INFOPLIST_FILE = DemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "zhubch.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};

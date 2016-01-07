@@ -19,16 +19,30 @@
 
 
 #import "ViewController.h"
+#import "Peer.h"
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
+{
+    Peer *p;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+ 
+    p = [[Peer alloc]initWithOptions:nil AndId:@"1234512"];
+    p.onOpen = ^(NSString *peerId){
+        NSLog(@"%@",peerId);
+//        [p connectToPeer:@"g1slnv8jyzrrudi" Options:@{@"label":@"text",@"serialization":@"none",@"metadata":@{@"message":@"12345"}}];
+    };
+    p.onConnection = ^(Connection *conn){
+        NSLog(@"zzz");
+    };
+
 }
 
 - (void)didReceiveMemoryWarning {

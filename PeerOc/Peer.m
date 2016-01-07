@@ -1,6 +1,6 @@
 //
 //  Peer.m
-//  PeerObjectiveC
+//  PeerObjc
 //
 //  Created by zhubch on 15-3-6.
 //  Copyright (c) 2015年 zhubch. All rights reserved.
@@ -23,6 +23,13 @@
 #import "RTCTypes.h"
 #import "RTCEAGLVideoView.h"
 
+#define kMessageQueueCapacity 10
+#define kDefaultHost @"0.peerjs.com"
+#define kDefaultPath @"/"
+#define kDefaultKey @"peerjs"
+
+#define kWsURLTemplate @"%@://%@:%ld%@/peerjs?key=%@&id=%@&token=%@"
+#define kDefaultSTUNServerUrl @"stun:stun.l.google.com:19302"
 
 @interface Peer () <SRWebSocketDelegate>
 
@@ -37,25 +44,26 @@
 
 - (instancetype)initWithOptions:(NSDictionary*)options AndId:(NSString*)id
 {
-    NSAssert(options, @"能来个正常的option吗");
-    
+    if (options == nil){
+        options = [self defaultOptions];
+    }
     if (self = [super init]) {
         _id = id;
         _path = options[@"path"];
         _host = options[@"host"];
         _key  = options[@"key"];
         _port = options[@"port"];
+        
         _secure = [options[@"secure"] boolValue];
         _iceServers = [self getIceServersWithUrls:[options[@"config"] objectForKey:@"iceServers"]];
-        
-        if (_port == 0) {
-            _port = _secure ? @"443" : @"80";
+
+        if (_port.length == 0) {
+            _port = _secure ? @"443" : @"9000";
         }
         
         if ([@"/" isEqualToString:_path]) {
             _path = @"";
         }
-        
         _open = NO;
         
         connections = [[NSMutableDictionary alloc]init];
@@ -74,6 +82,25 @@
     }
     
     return self;
+}
+
+- (NSDictionary*)defaultOptions
+{
+    return @{
+             @"host":kDefaultHost,
+             @"path":kDefaultPath,
+             @"key":kDefaultKey,
+             @"secure":@(NO),
+             @"config":@{
+                     @"iceServers":@[
+                             @{
+                                 @"url":kDefaultSTUNServerUrl,
+                                 @"username":@"",
+                                 @"credential":@""
+                                 }
+                             ]
+                     }
+             };
 }
 
 #pragma mark 必要的初始化准备
@@ -100,7 +127,10 @@
     NSString *proto = _secure ? @"wss" : @"ws";
     NSString *token = [self randStringWithMaxLenght:34];
     NSString *urlStr = [NSString stringWithFormat:@"%@://%@:%@%@/peerjs?key=%@&id=%@&token=%@",
-                        proto, _host,  _port, _path, _key, _id, token];
+                        proto, _host,  _port, _path, @"lwjd5qra8257b9", _id, token];
+    NSLog(@"%@",urlStr);
+//    urlStr = @"ws://0.peerjs.com:9000/peerjs?key=lwjd5qra8257b9&id=vtlouq3g0evcxr&token=ixkdittzusiaxpqkzesoahnzsrqlfwdpvo";
+    
     _webSock = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlStr]];
     _webSock.delegate = self;
     [_webSock open];
@@ -123,7 +153,7 @@
     if (!_open && !_webSock) {
         [self initializeServerConnection];
     }
-    DataConnection *d = [[DataConnection alloc]initWithDstPeerId:peerID AndPeer:self Options:options];
+    DataConnection *d = [[DataConnection alloc]initWithPeer:self destPeerId:peerID options:options];
     [self addConnection:d];
     return d;
 }
@@ -134,7 +164,7 @@
         [self initializeServerConnection];
     }
     
-    MediaConnection *m = [[MediaConnection alloc]initWithDstPeerId:peerID AndPeer:self Options:options];
+    MediaConnection *m = [[MediaConnection alloc]initWithPeer:self destPeerId:peerID options:options];
     [self addConnection:m];
     return m;
 }
@@ -165,7 +195,7 @@
     NSDictionary *message = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     NSString *type = message[@"type"];
     NSDictionary *payload = message[@"payload"];
-    NSString *dstId = message[@"src"];
+    NSString *destId = message[@"src"];
     NSString *connectionId = payload[@"connectionId"];
     
     if([@"OPEN" isEqualToString:type]){
@@ -178,7 +208,7 @@
         
     }else if ([@"OFFER" isEqualToString:type]) {
                 
-        Connection *connection = [self getConnectionWithPeerId:dstId ConnectionId:connectionId];
+        Connection *connection = [self getConnectionWithPeerId:destId ConnectionId:connectionId];
        
         if (connection) {
             NSLog(@"Connection is exist");
@@ -186,7 +216,7 @@
         }
         
         if ([payload[@"type"] isEqualToString:@"data"]) {
-            connection = [[DataConnection alloc]initWithDstPeerId:dstId AndPeer:self Options:@{
+            connection = [[DataConnection alloc]initWithPeer:self destPeerId:destId options:@{
                                                                                                @"connectionId": connectionId,
                                                                                                @"_payload": payload,
                                                                                                @"metadata": payload[@"metadata"] == nil ? @"" : payload[@"metadata"],
@@ -198,7 +228,7 @@
             [self addConnection:connection];
             
         } else if ([payload[@"type"] isEqualToString:@"media"]) {
-            connection = [[MediaConnection alloc]initWithDstPeerId:dstId AndPeer:self Options:@{
+            connection = [[MediaConnection alloc]initWithPeer:self destPeerId:destId options:@{
                                                                                                @"connectionId": connectionId,
                                                                                                @"_payload": payload,
                                                                                                @"metadata": payload[@"metadata"] == nil ? @"" : payload[@"metadata"],
@@ -213,7 +243,7 @@
         }
     }
     else {
-        Connection *conn = [self getConnectionWithPeerId:dstId ConnectionId:payload[@"connectionId"]];
+        Connection *conn = [self getConnectionWithPeerId:destId ConnectionId:payload[@"connectionId"]];
         [conn handelMessage:message];
     }
 }
@@ -243,15 +273,15 @@
 
 - (void)addConnection:(Connection*)connection
 {
-    if (connections[connection.dstId] == nil) {
-        [connections setObject:[NSMutableArray array] forKey:connection.dstId];
+    if (connections[connection.destId] == nil) {
+        [connections setObject:[NSMutableArray array] forKey:connection.destId];
     }
-    [connections[connection.dstId] addObject:connection];
+    [connections[connection.destId] addObject:connection];
 }
 
 - (void)removeConnection:(Connection*)connection
 {
-    [connections[connection.dstId] removeObject:connection];
+    [connections[connection.destId] removeObject:connection];
 }
 
 - (Connection*)getConnectionWithPeerId:(NSString*)peerID ConnectionId:(NSString*)id

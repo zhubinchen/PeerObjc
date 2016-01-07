@@ -1,6 +1,6 @@
 //
 //  DataConnection.m
-//  PeerObjectiveC
+//  PeerObjc
 //
 //  Created by zhubch on 15-3-6.
 //  Copyright (c) 2015年 zhubch. All rights reserved.
@@ -25,9 +25,9 @@
     RTCPeerConnection *pc;
 }
 
-- (instancetype)initWithDstPeerId:(NSString *)dstId AndPeer:(Peer *)peer Options:(NSDictionary *)options
+- (instancetype)initWithPeer:(Peer *)peer destPeerId:(NSString *)destId options:(NSDictionary *)options
 {
-    if (self = [super initWithDstPeerId:dstId AndPeer:peer Options:options]) {
+    if (self = [super initWithPeer:peer destPeerId:destId options:options]) {
         self.type = @"data";
         NSDictionary *config = options[@"_payload"] ? options[@"_payload"] : @{@"originator": @"true"} ;
         negotiator = [[Negotiator alloc]initWithConnection:self];
@@ -105,15 +105,15 @@
 {
     if (buffer.isBinary) {
     
-        if ([self.delegate respondsToSelector:@selector(dataConnection:DidRecievedData:)]) {
-            [self.delegate dataConnection:self DidRecievedData:buffer.data];
+        if ([self.delegate respondsToSelector:@selector(dataConnection:didRecievedData:)]) {
+            [self.delegate dataConnection:self didRecievedData:buffer.data];
         }
         
     } else {
         
-        if ([self.delegate respondsToSelector:@selector(dataConnection:DidRecievedMessage:)]) {
+        if ([self.delegate respondsToSelector:@selector(dataConnection:didRecievedMessage:)]) {
 
-            [self.delegate dataConnection:self DidRecievedMessage:[NSJSONSerialization JSONObjectWithData:buffer.data options:0 error:nil]];
+            [self.delegate dataConnection:self didRecievedMessage:[NSJSONSerialization JSONObjectWithData:buffer.data options:0 error:nil]];
         }
     }
 }

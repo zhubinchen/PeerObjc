@@ -1,6 +1,6 @@
 //
 //  MediaConnection.m
-//  PeerObjectiveC
+//  PeerObjc
 //
 //  Created by zhubch on 15-3-9.
 //  Copyright (c) 2015年 zhubch. All rights reserved.
@@ -31,9 +31,9 @@
 
 @synthesize open = _open;
 
-- (instancetype)initWithDstPeerId:(NSString *)dstId AndPeer:(Peer *)peer Options:(NSDictionary *)options
+- (instancetype)initWithPeer:(Peer *)peer destPeerId:(NSString *)destId options:(NSDictionary *)options
 {
-    if (self = [super initWithDstPeerId:dstId AndPeer:peer Options:options]) {
+    if (self = [super initWithPeer:peer destPeerId:destId options:options]) {
         self.type = @"media";
         self.id = self.id == nil ? @"mc_phks5x29u9885mi" : self.id;
         NSDictionary *config = options[@"_payload"] ? options[@"_payload"] : @{@"originator": @"true"} ;

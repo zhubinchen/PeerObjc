@@ -1,6 +1,6 @@
 //
 //  Connection.m
-//  PeerObjectiveC
+//  PeerObjc
 //
 //  Created by zhubch on 15-3-9.
 //  Copyright (c) 2015年 zhubch. All rights reserved.
@@ -11,10 +11,10 @@
 
 @implementation Connection
 
-- (instancetype)initWithDstPeerId:(NSString *)dstId AndPeer:(Peer *)peer Options:(NSDictionary *)options
+- (instancetype)initWithPeer:(Peer *)peer destPeerId:(NSString *)destId options:(NSDictionary *)options
 {
     if (self = [super init]) {
-        _dstId = dstId;
+        _destId = destId;
         _peer = peer;
         _open = NO;
         _id = options[@"connectionId"];
@@ -61,7 +61,7 @@
 
 - (NSString*)description
 {
-    return [NSString stringWithFormat:@"<connection:%@,dstPeer:%@>",self.id,self.dstId];
+    return [NSString stringWithFormat:@"<connection:%@,dstPeer:%@>",self.id,self.destId];
 }
 
 @end
