@@ -26,12 +26,20 @@
 #define kMessageQueueCapacity 10
 #define kDefaultHost @"0.peerjs.com"
 #define kDefaultPath @"/"
-#define kDefaultKey @"peerjs"
+#define kDefaultKey @"lwjd5qra8257b9"
 
 #define kWsURLTemplate @"%@://%@:%ld%@/peerjs?key=%@&id=%@&token=%@"
 #define kDefaultSTUNServerUrl @"stun:stun.l.google.com:19302"
 
 @interface Peer () <SRWebSocketDelegate>
+/**
+ *  以下是options内容
+ */
+@property(nonatomic, strong) NSString   *key;
+@property(nonatomic, strong) NSString   *host;
+@property(nonatomic, strong) NSString   *path;
+@property(nonatomic, assign) BOOL       secure;
+@property(nonatomic, strong) NSString   *port;
 
 @end
 
@@ -127,7 +135,7 @@
     NSString *proto = _secure ? @"wss" : @"ws";
     NSString *token = [self randStringWithMaxLenght:34];
     NSString *urlStr = [NSString stringWithFormat:@"%@://%@:%@%@/peerjs?key=%@&id=%@&token=%@",
-                        proto, _host,  _port, _path, @"lwjd5qra8257b9", _peerId, token];
+                        proto, _host,  _port, _path, _key, _peerId, token];
     NSLog(@"%@",urlStr);
 //    urlStr = @"ws://0.peerjs.com:9000/peerjs?key=lwjd5qra8257b9&id=vtlouq3g0evcxr&token=ixkdittzusiaxpqkzesoahnzsrqlfwdpvo";
     
@@ -304,6 +312,7 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
 {
+    NSLog(@"zzzz:%@",message);
     [self handleMessage:message];
 }
 

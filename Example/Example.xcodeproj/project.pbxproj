@@ -26,6 +26,8 @@
 		0786C48E1C3F59FF00012B3F /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C46A1C3F59FF00012B3F /* VideoView.m */; };
 		0786C48F1C3F59FF00012B3F /* libWebRTC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C46C1C3F59FF00012B3F /* libWebRTC.a */; };
 		0786C4911C3F5AA000012B3F /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C4901C3F5AA000012B3F /* libicucore.tbd */; };
+		0786C4941C3F754600012B3F /* TextChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4931C3F754600012B3F /* TextChatViewController.m */; };
+		0786C4971C3F7A0800012B3F /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4961C3F7A0800012B3F /* Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,7 +58,6 @@
 		0786C4641C3F59FF00012B3F /* Peer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Peer.m; sourceTree = "<group>"; };
 		0786C4661C3F59FF00012B3F /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		0786C4671C3F59FF00012B3F /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
-		0786C4681C3F59FF00012B3F /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		0786C4691C3F59FF00012B3F /* VideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoView.h; sourceTree = "<group>"; };
 		0786C46A1C3F59FF00012B3F /* VideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoView.m; sourceTree = "<group>"; };
 		0786C46C1C3F59FF00012B3F /* libWebRTC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWebRTC.a; sourceTree = "<group>"; };
@@ -87,6 +88,10 @@
 		0786C4851C3F59FF00012B3F /* RTCVideoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCVideoSource.h; sourceTree = "<group>"; };
 		0786C4861C3F59FF00012B3F /* RTCVideoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCVideoTrack.h; sourceTree = "<group>"; };
 		0786C4901C3F5AA000012B3F /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		0786C4921C3F754600012B3F /* TextChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextChatViewController.h; sourceTree = "<group>"; };
+		0786C4931C3F754600012B3F /* TextChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextChatViewController.m; sourceTree = "<group>"; };
+		0786C4951C3F7A0800012B3F /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		0786C4961C3F7A0800012B3F /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,10 +134,14 @@
 			isa = PBXGroup;
 			children = (
 				0786C4581C3F59FF00012B3F /* PeerObjc */,
+				0786C4951C3F7A0800012B3F /* Utils.h */,
+				0786C4961C3F7A0800012B3F /* Utils.m */,
 				0786C4031C3F57E000012B3F /* AppDelegate.h */,
 				0786C4041C3F57E000012B3F /* AppDelegate.m */,
 				0786C4061C3F57E000012B3F /* ViewController.h */,
 				0786C4071C3F57E000012B3F /* ViewController.m */,
+				0786C4921C3F754600012B3F /* TextChatViewController.h */,
+				0786C4931C3F754600012B3F /* TextChatViewController.m */,
 				0786C4091C3F57E000012B3F /* Main.storyboard */,
 				0786C40C1C3F57E000012B3F /* Assets.xcassets */,
 				0786C40E1C3F57E000012B3F /* LaunchScreen.storyboard */,
@@ -153,6 +162,8 @@
 		0786C4581C3F59FF00012B3F /* PeerObjc */ = {
 			isa = PBXGroup;
 			children = (
+				0786C4631C3F59FF00012B3F /* Peer.h */,
+				0786C4641C3F59FF00012B3F /* Peer.m */,
 				0786C4591C3F59FF00012B3F /* Connection.h */,
 				0786C45A1C3F59FF00012B3F /* Connection.m */,
 				0786C45B1C3F59FF00012B3F /* ConstraintsFactory.h */,
@@ -163,12 +174,9 @@
 				0786C4601C3F59FF00012B3F /* MediaConnection.m */,
 				0786C4611C3F59FF00012B3F /* Negotiator.h */,
 				0786C4621C3F59FF00012B3F /* Negotiator.m */,
-				0786C4631C3F59FF00012B3F /* Peer.h */,
-				0786C4641C3F59FF00012B3F /* Peer.m */,
-				0786C4651C3F59FF00012B3F /* SRWebSocket */,
-				0786C4681C3F59FF00012B3F /* Utilities.h */,
 				0786C4691C3F59FF00012B3F /* VideoView.h */,
 				0786C46A1C3F59FF00012B3F /* VideoView.m */,
+				0786C4651C3F59FF00012B3F /* SRWebSocket */,
 				0786C46B1C3F59FF00012B3F /* WebRTC */,
 			);
 			path = PeerObjc;
@@ -290,6 +298,7 @@
 				0786C4081C3F57E000012B3F /* ViewController.m in Sources */,
 				0786C4891C3F59FF00012B3F /* DataConnection.m in Sources */,
 				0786C48D1C3F59FF00012B3F /* SRWebSocket.m in Sources */,
+				0786C4971C3F7A0800012B3F /* Utils.m in Sources */,
 				0786C48E1C3F59FF00012B3F /* VideoView.m in Sources */,
 				0786C4051C3F57E000012B3F /* AppDelegate.m in Sources */,
 				0786C48B1C3F59FF00012B3F /* Negotiator.m in Sources */,
@@ -298,6 +307,7 @@
 				0786C4021C3F57E000012B3F /* main.m in Sources */,
 				0786C4881C3F59FF00012B3F /* ConstraintsFactory.m in Sources */,
 				0786C4871C3F59FF00012B3F /* Connection.m in Sources */,
+				0786C4941C3F754600012B3F /* TextChatViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

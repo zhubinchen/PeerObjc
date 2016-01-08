@@ -98,7 +98,7 @@
 {
     NSDictionary *message = @{@"type": @"OFFER",
                               @"src": _connection.peer.peerId,
-                              @"dest": _connection.destId,
+                              @"dst": _connection.destId,
                               @"payload":
                                   @{@"browser": @"Chrome",
                                     @"serialization": _connection.serialization,
@@ -121,7 +121,7 @@
     NSLog(@"%@",sdp);
     [self sendMessage:@{@"type": @"ANSWER",
                               @"src": _connection.peer.peerId,
-                              @"dest": _connection.destId,
+                              @"dst": _connection.destId,
                               @"payload":
                                   @{@"browser": @"Chrome",
                                     @"serialization": @"binary",
@@ -209,7 +209,7 @@ didSetSessionDescriptionWithError:(NSError *)error {
     
     [self sendMessage:@{@"type": @"CANDIDATE",
                                      @"src": _connection.peer.peerId,
-                                     @"dest": _connection.destId,
+                                     @"dst": _connection.destId,
                                      @"payload": @{
                                              @"type": _connection.type,
                                              @"connectionId": _connection.id,

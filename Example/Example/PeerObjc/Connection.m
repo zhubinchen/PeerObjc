@@ -18,7 +18,7 @@
         _peer = peer;
         _open = NO;
         _id = options[@"connectionId"];
-        _label = options[@"label"];
+        _label = options[@"label"] ? options[@"label"] : @"";
         _metadata = options[@"metadata"];
         _serialization = @"binary";
         _reliable = YES;
