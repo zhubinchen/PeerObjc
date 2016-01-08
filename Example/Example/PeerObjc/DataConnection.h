@@ -25,6 +25,9 @@
 
 @end
 
+/**
+ *  传输二进制数据和文本消息用的连接
+ */
 @interface DataConnection : Connection
 
 @property (nonatomic,strong,readonly) NSData *recivedData;

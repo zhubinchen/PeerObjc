@@ -92,6 +92,7 @@
 		0786C4931C3F754600012B3F /* TextChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextChatViewController.m; sourceTree = "<group>"; };
 		0786C4951C3F7A0800012B3F /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		0786C4961C3F7A0800012B3F /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		0786C4981C3FA91F00012B3F /* PeerObjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeerObjc.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +163,7 @@
 		0786C4581C3F59FF00012B3F /* PeerObjc */ = {
 			isa = PBXGroup;
 			children = (
+				0786C4981C3FA91F00012B3F /* PeerObjc.h */,
 				0786C4631C3F59FF00012B3F /* Peer.h */,
 				0786C4641C3F59FF00012B3F /* Peer.m */,
 				0786C4591C3F59FF00012B3F /* Connection.h */,

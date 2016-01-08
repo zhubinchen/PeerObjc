@@ -11,6 +11,9 @@
 #import "DataConnection.h"
 #import "MediaConnection.h"
 
+/**
+ *  代表一个端
+ */
 @interface Peer : NSObject
 
 /**
@@ -55,7 +58,7 @@
 /**
  *  实例化
  *
- *  @param peerId  可以自己设定，也可以为空，自己设定的时候注意不要跟其他peer重复。
+ *  @param peerId  可以自己设定，也可以为空，自己设定的时候千万不要分配给两个peer一样的ID。
  *  @param options 可以自己设定，也可以为空，自己设定时应按照以下格式：
  *                                @{
  *                                  @"host":kDefaultHost,

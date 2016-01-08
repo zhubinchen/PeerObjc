@@ -23,6 +23,9 @@
 
 @end
 
+/**
+ *  视频通话用的连接
+ */
 @interface MediaConnection : Connection
 
 @property (nonatomic,assign) id<MediaConnectionDelegate> delegate;

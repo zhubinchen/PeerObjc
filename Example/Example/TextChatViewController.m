@@ -7,6 +7,7 @@
 //
 
 #import "TextChatViewController.h"
+#import "Utils.h"
 
 @interface TextChatViewController () <UITableViewDataSource,UITableViewDelegate,DataConnectionDelegate>
 
@@ -22,22 +23,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     messages = [NSMutableArray array];
     _conn.delegate = self;
 }
 
+- (void)dataConnectionDidOpen:(DataConnection *)connection
+{
+    NSLog(@"connection opened");
+}
+
 - (void)dataConnection:(DataConnection *)connection didRecievedMessage:(NSString *)msg
 {
-    [messages addObject:_messageInput.text];
-    [_messageTableView reloadData];
+    [messages addObject:@{@"fromSelf":@(NO),@"message":msg}];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_messageTableView reloadData];
+    });
 }
 
 - (IBAction)sendMessage:(id)sender
 {
     if (_messageInput.text.length) {
         [_conn sendMessage:_messageInput.text];
-        [messages addObject:_messageInput.text];
+        [messages addObject:@{@"fromSelf":@(YES),@"message":_messageInput.text}];
         _messageInput.text = @"";
         [_messageTableView reloadData];
     }
@@ -56,13 +63,33 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message" forIndexPath:indexPath];
-    cell.textLabel.text = messages[indexPath.row];
+    NSDictionary *msg = messages[indexPath.row];
+    cell.textLabel.text = msg[@"message"];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.numberOfLines = 0;
+    if ([msg[@"fromSelf"] boolValue]) {
+        cell.textLabel.textAlignment = NSTextAlignmentRight;
+        cell.textLabel.textColor = [UIColor colorWithRed:0.1 green:0.8 blue:0.6 alpha:1];
+    }else{
+        cell.textLabel.textAlignment = NSTextAlignmentLeft;
+        cell.textLabel.textColor = [UIColor grayColor];
+    }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40;
+    NSDictionary *msg = messages[indexPath.row];
+    NSString *m = msg[@"message"];
+    NSDictionary * attributes = [NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:14] forKey:NSFontAttributeName];
+    NSAttributedString *attributedText =
+    [[NSAttributedString alloc]
+     initWithString:m
+     attributes:attributes];
+    CGSize size = [attributedText boundingRectWithSize:CGSizeMake(kScreenWidth - 20, 100)
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil].size;
+    return size.height + 20;
 }
 
 /*

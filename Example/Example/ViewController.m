@@ -29,12 +29,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    p = [[Peer alloc]initWithPeerId:@"123qweqq" options:nil];
+    p = [[Peer alloc]initWithPeerId:@"123123" options:nil];
     
     __weak ViewController *__self = self;
     p.onOpen = ^(NSString *peerId){
         __self.myPeerIdText.text = peerId;
         NSLog(@"%@",peerId);
+    };
+    
+    p.onError = ^(NSError *err){
+        NSLog(@"%@",err);
     };
     
     p.onConnection = ^(Connection *conn){
@@ -46,7 +50,7 @@
         NSString *msg =  [NSString stringWithFormat:@"%@%@",conn.destId,[conn isKindOfClass:[DataConnection class]] ? @"":@""];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.clickedButton = ^(NSInteger buttonIndex,UIAlertView *alertView){
-            if (buttonIndex == 0) {
+            if (buttonIndex == 1) {
                 [__self performSegueWithIdentifier:@"text" sender:nil];
             }else {
                 [conn close];

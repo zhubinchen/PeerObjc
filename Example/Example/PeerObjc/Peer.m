@@ -214,6 +214,14 @@
             _onOpen(_peerId);
         }
         
+    }else if([@"EXPIRE" isEqualToString:type]){
+        
+        [self drainMessages];
+        NSError *err = [NSError errorWithDomain:@"连接超时" code:100 userInfo:nil];
+        if (_onError) {
+            _onError(err);
+        }
+        
     }else if ([@"OFFER" isEqualToString:type]) {
                 
         Connection *connection = [self getConnectionWithPeerId:destId ConnectionId:connectionId];
@@ -312,7 +320,7 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
 {
-    NSLog(@"zzzz:%@",message);
+    NSLog(@"websocket recieved:%@",message);
     [self handleMessage:message];
 }
 
@@ -332,7 +340,7 @@
 {
     [self disconnectAllConnections];
     _open = NO;
-//    [_webSock close];
+    [_webSock close];
     _webSock = nil;
 }
 

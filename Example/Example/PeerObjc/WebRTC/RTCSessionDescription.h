@@ -38,7 +38,7 @@
 // The session type.
 @property(nonatomic, copy, readonly) NSString *type;
 
-- (id)initwithType:(NSString *)type sdp:(NSString *)sdp;
+- (id)initWithType:(NSString *)type sdp:(NSString *)sdp;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 // Disallow init and don't add to documentation

@@ -147,7 +147,7 @@
 
 - (void)handelSdp:(NSDictionary*)sdpDic withType:(NSString*)type
 {
-    RTCSessionDescription *sdp = [[RTCSessionDescription alloc]initwithType:type sdp:sdpDic[@"sdp"]];
+    RTCSessionDescription *sdp = [[RTCSessionDescription alloc]initWithType:type sdp:sdpDic[@"sdp"]];
     sdpType = type;
     where = @"remote";
     [_peerConnection setRemoteDescriptionWithDelegate:self sessionDescription:sdp];
