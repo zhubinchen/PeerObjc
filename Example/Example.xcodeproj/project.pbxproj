@@ -1,0 +1,466 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0786C4021C3F57E000012B3F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4011C3F57E000012B3F /* main.m */; };
+		0786C4051C3F57E000012B3F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4041C3F57E000012B3F /* AppDelegate.m */; };
+		0786C4081C3F57E000012B3F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4071C3F57E000012B3F /* ViewController.m */; };
+		0786C40B1C3F57E000012B3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0786C4091C3F57E000012B3F /* Main.storyboard */; };
+		0786C40D1C3F57E000012B3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0786C40C1C3F57E000012B3F /* Assets.xcassets */; };
+		0786C4101C3F57E000012B3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0786C40E1C3F57E000012B3F /* LaunchScreen.storyboard */; };
+		0786C4531C3F598800012B3F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C4521C3F598800012B3F /* GLKit.framework */; };
+		0786C4551C3F599300012B3F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C4541C3F599300012B3F /* libstdc++.tbd */; };
+		0786C4571C3F599A00012B3F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C4561C3F599A00012B3F /* libsqlite3.tbd */; };
+		0786C4871C3F59FF00012B3F /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C45A1C3F59FF00012B3F /* Connection.m */; };
+		0786C4881C3F59FF00012B3F /* ConstraintsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C45C1C3F59FF00012B3F /* ConstraintsFactory.m */; };
+		0786C4891C3F59FF00012B3F /* DataConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C45E1C3F59FF00012B3F /* DataConnection.m */; };
+		0786C48A1C3F59FF00012B3F /* MediaConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4601C3F59FF00012B3F /* MediaConnection.m */; };
+		0786C48B1C3F59FF00012B3F /* Negotiator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4621C3F59FF00012B3F /* Negotiator.m */; };
+		0786C48C1C3F59FF00012B3F /* Peer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4641C3F59FF00012B3F /* Peer.m */; };
+		0786C48D1C3F59FF00012B3F /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4671C3F59FF00012B3F /* SRWebSocket.m */; };
+		0786C48E1C3F59FF00012B3F /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C46A1C3F59FF00012B3F /* VideoView.m */; };
+		0786C48F1C3F59FF00012B3F /* libWebRTC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C46C1C3F59FF00012B3F /* libWebRTC.a */; };
+		0786C4911C3F5AA000012B3F /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C4901C3F5AA000012B3F /* libicucore.tbd */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0786C3FD1C3F57E000012B3F /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0786C4011C3F57E000012B3F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0786C4031C3F57E000012B3F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0786C4041C3F57E000012B3F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0786C4061C3F57E000012B3F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0786C4071C3F57E000012B3F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0786C40A1C3F57E000012B3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0786C40C1C3F57E000012B3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0786C40F1C3F57E000012B3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0786C4111C3F57E000012B3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0786C4521C3F598800012B3F /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		0786C4541C3F599300012B3F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		0786C4561C3F599A00012B3F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		0786C4591C3F59FF00012B3F /* Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connection.h; sourceTree = "<group>"; };
+		0786C45A1C3F59FF00012B3F /* Connection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Connection.m; sourceTree = "<group>"; };
+		0786C45B1C3F59FF00012B3F /* ConstraintsFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintsFactory.h; sourceTree = "<group>"; };
+		0786C45C1C3F59FF00012B3F /* ConstraintsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstraintsFactory.m; sourceTree = "<group>"; };
+		0786C45D1C3F59FF00012B3F /* DataConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataConnection.h; sourceTree = "<group>"; };
+		0786C45E1C3F59FF00012B3F /* DataConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataConnection.m; sourceTree = "<group>"; };
+		0786C45F1C3F59FF00012B3F /* MediaConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaConnection.h; sourceTree = "<group>"; };
+		0786C4601C3F59FF00012B3F /* MediaConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaConnection.m; sourceTree = "<group>"; };
+		0786C4611C3F59FF00012B3F /* Negotiator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Negotiator.h; sourceTree = "<group>"; };
+		0786C4621C3F59FF00012B3F /* Negotiator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Negotiator.m; sourceTree = "<group>"; };
+		0786C4631C3F59FF00012B3F /* Peer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Peer.h; sourceTree = "<group>"; };
+		0786C4641C3F59FF00012B3F /* Peer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Peer.m; sourceTree = "<group>"; };
+		0786C4661C3F59FF00012B3F /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		0786C4671C3F59FF00012B3F /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		0786C4681C3F59FF00012B3F /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		0786C4691C3F59FF00012B3F /* VideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoView.h; sourceTree = "<group>"; };
+		0786C46A1C3F59FF00012B3F /* VideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoView.m; sourceTree = "<group>"; };
+		0786C46C1C3F59FF00012B3F /* libWebRTC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWebRTC.a; sourceTree = "<group>"; };
+		0786C46D1C3F59FF00012B3F /* RTCAudioSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCAudioSource.h; sourceTree = "<group>"; };
+		0786C46E1C3F59FF00012B3F /* RTCAudioTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCAudioTrack.h; sourceTree = "<group>"; };
+		0786C46F1C3F59FF00012B3F /* RTCDataChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCDataChannel.h; sourceTree = "<group>"; };
+		0786C4701C3F59FF00012B3F /* RTCEAGLVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCEAGLVideoView.h; sourceTree = "<group>"; };
+		0786C4711C3F59FF00012B3F /* RTCI420Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCI420Frame.h; sourceTree = "<group>"; };
+		0786C4721C3F59FF00012B3F /* RTCICECandidate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCICECandidate.h; sourceTree = "<group>"; };
+		0786C4731C3F59FF00012B3F /* RTCICEServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCICEServer.h; sourceTree = "<group>"; };
+		0786C4741C3F59FF00012B3F /* RTCMediaConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCMediaConstraints.h; sourceTree = "<group>"; };
+		0786C4751C3F59FF00012B3F /* RTCMediaSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCMediaSource.h; sourceTree = "<group>"; };
+		0786C4761C3F59FF00012B3F /* RTCMediaStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCMediaStream.h; sourceTree = "<group>"; };
+		0786C4771C3F59FF00012B3F /* RTCMediaStreamTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCMediaStreamTrack.h; sourceTree = "<group>"; };
+		0786C4781C3F59FF00012B3F /* RTCNSGLVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCNSGLVideoView.h; sourceTree = "<group>"; };
+		0786C4791C3F59FF00012B3F /* RTCOpenGLVideoRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCOpenGLVideoRenderer.h; sourceTree = "<group>"; };
+		0786C47A1C3F59FF00012B3F /* RTCPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCPair.h; sourceTree = "<group>"; };
+		0786C47B1C3F59FF00012B3F /* RTCPeerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCPeerConnection.h; sourceTree = "<group>"; };
+		0786C47C1C3F59FF00012B3F /* RTCPeerConnectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCPeerConnectionDelegate.h; sourceTree = "<group>"; };
+		0786C47D1C3F59FF00012B3F /* RTCPeerConnectionFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCPeerConnectionFactory.h; sourceTree = "<group>"; };
+		0786C47E1C3F59FF00012B3F /* RTCSessionDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCSessionDescription.h; sourceTree = "<group>"; };
+		0786C47F1C3F59FF00012B3F /* RTCSessionDescriptionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCSessionDescriptionDelegate.h; sourceTree = "<group>"; };
+		0786C4801C3F59FF00012B3F /* RTCStatsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCStatsDelegate.h; sourceTree = "<group>"; };
+		0786C4811C3F59FF00012B3F /* RTCStatsReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCStatsReport.h; sourceTree = "<group>"; };
+		0786C4821C3F59FF00012B3F /* RTCTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCTypes.h; sourceTree = "<group>"; };
+		0786C4831C3F59FF00012B3F /* RTCVideoCapturer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCVideoCapturer.h; sourceTree = "<group>"; };
+		0786C4841C3F59FF00012B3F /* RTCVideoRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCVideoRenderer.h; sourceTree = "<group>"; };
+		0786C4851C3F59FF00012B3F /* RTCVideoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCVideoSource.h; sourceTree = "<group>"; };
+		0786C4861C3F59FF00012B3F /* RTCVideoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCVideoTrack.h; sourceTree = "<group>"; };
+		0786C4901C3F5AA000012B3F /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0786C3FA1C3F57E000012B3F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0786C4911C3F5AA000012B3F /* libicucore.tbd in Frameworks */,
+				0786C48F1C3F59FF00012B3F /* libWebRTC.a in Frameworks */,
+				0786C4571C3F599A00012B3F /* libsqlite3.tbd in Frameworks */,
+				0786C4551C3F599300012B3F /* libstdc++.tbd in Frameworks */,
+				0786C4531C3F598800012B3F /* GLKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0786C3F41C3F57E000012B3F = {
+			isa = PBXGroup;
+			children = (
+				0786C4901C3F5AA000012B3F /* libicucore.tbd */,
+				0786C4561C3F599A00012B3F /* libsqlite3.tbd */,
+				0786C4541C3F599300012B3F /* libstdc++.tbd */,
+				0786C4521C3F598800012B3F /* GLKit.framework */,
+				0786C3FF1C3F57E000012B3F /* Example */,
+				0786C3FE1C3F57E000012B3F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0786C3FE1C3F57E000012B3F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0786C3FD1C3F57E000012B3F /* Example.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0786C3FF1C3F57E000012B3F /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				0786C4581C3F59FF00012B3F /* PeerObjc */,
+				0786C4031C3F57E000012B3F /* AppDelegate.h */,
+				0786C4041C3F57E000012B3F /* AppDelegate.m */,
+				0786C4061C3F57E000012B3F /* ViewController.h */,
+				0786C4071C3F57E000012B3F /* ViewController.m */,
+				0786C4091C3F57E000012B3F /* Main.storyboard */,
+				0786C40C1C3F57E000012B3F /* Assets.xcassets */,
+				0786C40E1C3F57E000012B3F /* LaunchScreen.storyboard */,
+				0786C4111C3F57E000012B3F /* Info.plist */,
+				0786C4001C3F57E000012B3F /* Supporting Files */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		0786C4001C3F57E000012B3F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0786C4011C3F57E000012B3F /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0786C4581C3F59FF00012B3F /* PeerObjc */ = {
+			isa = PBXGroup;
+			children = (
+				0786C4591C3F59FF00012B3F /* Connection.h */,
+				0786C45A1C3F59FF00012B3F /* Connection.m */,
+				0786C45B1C3F59FF00012B3F /* ConstraintsFactory.h */,
+				0786C45C1C3F59FF00012B3F /* ConstraintsFactory.m */,
+				0786C45D1C3F59FF00012B3F /* DataConnection.h */,
+				0786C45E1C3F59FF00012B3F /* DataConnection.m */,
+				0786C45F1C3F59FF00012B3F /* MediaConnection.h */,
+				0786C4601C3F59FF00012B3F /* MediaConnection.m */,
+				0786C4611C3F59FF00012B3F /* Negotiator.h */,
+				0786C4621C3F59FF00012B3F /* Negotiator.m */,
+				0786C4631C3F59FF00012B3F /* Peer.h */,
+				0786C4641C3F59FF00012B3F /* Peer.m */,
+				0786C4651C3F59FF00012B3F /* SRWebSocket */,
+				0786C4681C3F59FF00012B3F /* Utilities.h */,
+				0786C4691C3F59FF00012B3F /* VideoView.h */,
+				0786C46A1C3F59FF00012B3F /* VideoView.m */,
+				0786C46B1C3F59FF00012B3F /* WebRTC */,
+			);
+			path = PeerObjc;
+			sourceTree = "<group>";
+		};
+		0786C4651C3F59FF00012B3F /* SRWebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				0786C4661C3F59FF00012B3F /* SRWebSocket.h */,
+				0786C4671C3F59FF00012B3F /* SRWebSocket.m */,
+			);
+			path = SRWebSocket;
+			sourceTree = "<group>";
+		};
+		0786C46B1C3F59FF00012B3F /* WebRTC */ = {
+			isa = PBXGroup;
+			children = (
+				0786C46C1C3F59FF00012B3F /* libWebRTC.a */,
+				0786C46D1C3F59FF00012B3F /* RTCAudioSource.h */,
+				0786C46E1C3F59FF00012B3F /* RTCAudioTrack.h */,
+				0786C46F1C3F59FF00012B3F /* RTCDataChannel.h */,
+				0786C4701C3F59FF00012B3F /* RTCEAGLVideoView.h */,
+				0786C4711C3F59FF00012B3F /* RTCI420Frame.h */,
+				0786C4721C3F59FF00012B3F /* RTCICECandidate.h */,
+				0786C4731C3F59FF00012B3F /* RTCICEServer.h */,
+				0786C4741C3F59FF00012B3F /* RTCMediaConstraints.h */,
+				0786C4751C3F59FF00012B3F /* RTCMediaSource.h */,
+				0786C4761C3F59FF00012B3F /* RTCMediaStream.h */,
+				0786C4771C3F59FF00012B3F /* RTCMediaStreamTrack.h */,
+				0786C4781C3F59FF00012B3F /* RTCNSGLVideoView.h */,
+				0786C4791C3F59FF00012B3F /* RTCOpenGLVideoRenderer.h */,
+				0786C47A1C3F59FF00012B3F /* RTCPair.h */,
+				0786C47B1C3F59FF00012B3F /* RTCPeerConnection.h */,
+				0786C47C1C3F59FF00012B3F /* RTCPeerConnectionDelegate.h */,
+				0786C47D1C3F59FF00012B3F /* RTCPeerConnectionFactory.h */,
+				0786C47E1C3F59FF00012B3F /* RTCSessionDescription.h */,
+				0786C47F1C3F59FF00012B3F /* RTCSessionDescriptionDelegate.h */,
+				0786C4801C3F59FF00012B3F /* RTCStatsDelegate.h */,
+				0786C4811C3F59FF00012B3F /* RTCStatsReport.h */,
+				0786C4821C3F59FF00012B3F /* RTCTypes.h */,
+				0786C4831C3F59FF00012B3F /* RTCVideoCapturer.h */,
+				0786C4841C3F59FF00012B3F /* RTCVideoRenderer.h */,
+				0786C4851C3F59FF00012B3F /* RTCVideoSource.h */,
+				0786C4861C3F59FF00012B3F /* RTCVideoTrack.h */,
+			);
+			path = WebRTC;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0786C3FC1C3F57E000012B3F /* Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0786C4141C3F57E000012B3F /* Build configuration list for PBXNativeTarget "Example" */;
+			buildPhases = (
+				0786C3F91C3F57E000012B3F /* Sources */,
+				0786C3FA1C3F57E000012B3F /* Frameworks */,
+				0786C3FB1C3F57E000012B3F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Example;
+			productName = Example;
+			productReference = 0786C3FD1C3F57E000012B3F /* Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0786C3F51C3F57E000012B3F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = zhubch;
+				TargetAttributes = {
+					0786C3FC1C3F57E000012B3F = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = 0786C3F81C3F57E000012B3F /* Build configuration list for PBXProject "Example" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0786C3F41C3F57E000012B3F;
+			productRefGroup = 0786C3FE1C3F57E000012B3F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0786C3FC1C3F57E000012B3F /* Example */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0786C3FB1C3F57E000012B3F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0786C4101C3F57E000012B3F /* LaunchScreen.storyboard in Resources */,
+				0786C40D1C3F57E000012B3F /* Assets.xcassets in Resources */,
+				0786C40B1C3F57E000012B3F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0786C3F91C3F57E000012B3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0786C4081C3F57E000012B3F /* ViewController.m in Sources */,
+				0786C4891C3F59FF00012B3F /* DataConnection.m in Sources */,
+				0786C48D1C3F59FF00012B3F /* SRWebSocket.m in Sources */,
+				0786C48E1C3F59FF00012B3F /* VideoView.m in Sources */,
+				0786C4051C3F57E000012B3F /* AppDelegate.m in Sources */,
+				0786C48B1C3F59FF00012B3F /* Negotiator.m in Sources */,
+				0786C48A1C3F59FF00012B3F /* MediaConnection.m in Sources */,
+				0786C48C1C3F59FF00012B3F /* Peer.m in Sources */,
+				0786C4021C3F57E000012B3F /* main.m in Sources */,
+				0786C4881C3F59FF00012B3F /* ConstraintsFactory.m in Sources */,
+				0786C4871C3F59FF00012B3F /* Connection.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0786C4091C3F57E000012B3F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0786C40A1C3F57E000012B3F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0786C40E1C3F57E000012B3F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0786C40F1C3F57E000012B3F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0786C4121C3F57E000012B3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0786C4131C3F57E000012B3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0786C4151C3F57E000012B3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Example/PeerObjc/WebRTC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zhubch.Example;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0786C4161C3F57E000012B3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Example/PeerObjc/WebRTC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zhubch.Example;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0786C3F81C3F57E000012B3F /* Build configuration list for PBXProject "Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0786C4121C3F57E000012B3F /* Debug */,
+				0786C4131C3F57E000012B3F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0786C4141C3F57E000012B3F /* Build configuration list for PBXNativeTarget "Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0786C4151C3F57E000012B3F /* Debug */,
+				0786C4161C3F57E000012B3F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0786C3F51C3F57E000012B3F /* Project object */;
+}
