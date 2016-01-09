@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--PeerObjc-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
@@ -101,7 +101,9 @@
                             <constraint firstItem="1iY-qX-1ZH" firstAttribute="top" secondItem="CER-Z5-EhE" secondAttribute="bottom" constant="20" id="vpb-kX-gYx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="HSJ-SP-0WD"/>
+                    <navigationItem key="navigationItem" title="PeerObjc" id="HSJ-SP-0WD">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Za1-LZ-a6l"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="myPeerIdText" destination="S3U-dH-eKC" id="ZcL-lw-Pkd"/>
@@ -113,7 +115,7 @@
             </objects>
             <point key="canvasLocation" x="105" y="273"/>
         </scene>
-        <!--Text Chat View Controller-->
+        <!--文字聊天-->
         <scene sceneID="FEy-R1-Pcr">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="Gvy-yy-n8s" customClass="TextChatViewController" sceneMemberID="viewController">
@@ -153,6 +155,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Gvy-yy-n8s" id="MmW-vP-ggc"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fr-Ch-Iqe">
                                         <rect key="frame" x="262" y="7" width="50" height="30"/>
@@ -179,15 +184,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="nmu-0N-t6X" firstAttribute="top" secondItem="tGh-fe-nx7" secondAttribute="bottom" id="8Ph-h6-fzN"/>
                             <constraint firstItem="UJG-Ea-hCL" firstAttribute="top" secondItem="nmu-0N-t6X" secondAttribute="bottom" id="9t7-Mp-hkt"/>
-                            <constraint firstItem="tcA-cX-qKB" firstAttribute="top" secondItem="UJG-Ea-hCL" secondAttribute="bottom" id="JQu-8a-M0k"/>
+                            <constraint firstItem="tcA-cX-qKB" firstAttribute="top" secondItem="UJG-Ea-hCL" secondAttribute="bottom" id="LRM-o6-1lj"/>
                             <constraint firstAttribute="trailing" secondItem="nmu-0N-t6X" secondAttribute="trailing" id="OLD-v0-wL0"/>
-                            <constraint firstItem="nmu-0N-t6X" firstAttribute="top" secondItem="tGh-fe-nx7" secondAttribute="bottom" id="aJh-nA-yQu"/>
                             <constraint firstItem="nmu-0N-t6X" firstAttribute="leading" secondItem="MbT-Kt-pLZ" secondAttribute="leading" id="blP-ZD-WgO"/>
                             <constraint firstAttribute="trailing" secondItem="UJG-Ea-hCL" secondAttribute="trailing" id="hUk-Ww-9Br"/>
                             <constraint firstItem="UJG-Ea-hCL" firstAttribute="leading" secondItem="MbT-Kt-pLZ" secondAttribute="leading" id="o0r-RE-Smu"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="文字聊天" id="aOa-Kw-Kgl">
+                        <barButtonItem key="backBarButtonItem" title=" " id="KiX-c9-Moc"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="messageInput" destination="7DE-vV-zG9" id="70G-92-PlU"/>
                         <outlet property="messageTableView" destination="nmu-0N-t6X" id="mFO-S4-kh6"/>
@@ -206,6 +214,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Fvh-Md-bfO"/>

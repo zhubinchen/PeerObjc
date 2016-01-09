@@ -67,8 +67,7 @@
     
     RTCVideoCapturer *capturer = [RTCVideoCapturer capturerWithDeviceName:cameraID];
     RTCMediaConstraints *mediaConstraints = [ConstraintsFactory constraintsForMediaStream];
-    RTCVideoSource *videoSource = [_factory videoSourceWithCapturer:capturer
-                                                       constraints:mediaConstraints];
+    RTCVideoSource *videoSource = [_factory videoSourceWithCapturer:capturer constraints:mediaConstraints];
     RTCVideoTrack* localVideoTrack = [_factory videoTrackWithID:@"ARDAMSv0" source:videoSource];
     
     if (localVideoTrack) {

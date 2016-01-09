@@ -9,8 +9,9 @@
 #import "TextChatViewController.h"
 #import "Utils.h"
 
-@interface TextChatViewController () <UITableViewDataSource,UITableViewDelegate,DataConnectionDelegate>
+@interface TextChatViewController () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,DataConnectionDelegate>
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomSpace;
 @property (nonatomic,weak) IBOutlet UITableView *messageTableView;
 @property (nonatomic,weak) IBOutlet UITextField *messageInput;
 
@@ -25,6 +26,28 @@
     [super viewDidLoad];
     messages = [NSMutableArray array];
     _conn.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void)keyboardChanged:(NSNotification*)noti
+{
+    NSDictionary *info = noti.userInfo;
+    
+    NSTimeInterval interval = [info[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    CGFloat height = kScreenHeight - [info[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
+
+    [self.view layoutIfNeeded];
+    [UIView animateWithDuration:interval animations:^{
+        self.bottomSpace.constant = height;
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self sendMessage:nil];
+    return YES;
 }
 
 - (void)dataConnectionDidOpen:(DataConnection *)connection
@@ -47,6 +70,9 @@
         [messages addObject:@{@"fromSelf":@(YES),@"message":_messageInput.text}];
         _messageInput.text = @"";
         [_messageTableView reloadData];
+        [_messageInput resignFirstResponder];
+    }else{
+        [self showToast:@"请输入要发送的内容"];
     }
 }
 

@@ -168,8 +168,7 @@
 
 #pragma mark - RTCSessionDescriptionDelegate
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-didCreateSessionDescription:(RTCSessionDescription *)sdp
+- (void)peerConnection:(RTCPeerConnection *)peerConnection didCreateSessionDescription:(RTCSessionDescription *)sdp
                  error:(NSError *)error {
     if (error) {
         NSLog(@"failed to createSDP,error:%@",error);
@@ -181,8 +180,7 @@ didCreateSessionDescription:(RTCSessionDescription *)sdp
     [_peerConnection setLocalDescriptionWithDelegate:self sessionDescription:sdp];
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-didSetSessionDescriptionWithError:(NSError *)error {
+- (void)peerConnection:(RTCPeerConnection *)peerConnection didSetSessionDescriptionWithError:(NSError *)error {
     if (error) {
         NSLog(@"Failed to set %@Description:%@ Error:%@",where,sdpType,error);
         return;
