@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--PeerObjc-->
@@ -67,6 +68,9 @@
                                     <constraint firstAttribute="height" constant="30" id="QC4-5f-tuF"/>
                                 </constraints>
                                 <state key="normal" title="视频通话"/>
+                                <connections>
+                                    <action selector="videoChat:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kt3-eY-3UO"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWz-G6-2wu">
                                 <rect key="frame" x="220" y="269" width="80" height="30"/>
@@ -109,6 +113,7 @@
                         <outlet property="myPeerIdText" destination="S3U-dH-eKC" id="ZcL-lw-Pkd"/>
                         <outlet property="otherPeerIdText" destination="CER-Z5-EhE" id="Er8-Td-9zR"/>
                         <segue destination="Gvy-yy-n8s" kind="show" identifier="text" id="L6s-H1-Zkd"/>
+                        <segue destination="cmn-ae-1Dt" kind="show" identifier="media" id="DzC-Gv-iTy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -197,13 +202,63 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="KiX-c9-Moc"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomSpace" destination="LRM-o6-1lj" id="AAQ-lI-uqw"/>
                         <outlet property="messageInput" destination="7DE-vV-zG9" id="70G-92-PlU"/>
                         <outlet property="messageTableView" destination="nmu-0N-t6X" id="mFO-S4-kh6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2dc-dH-uLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="556" y="273"/>
+            <point key="canvasLocation" x="644" y="-32"/>
+        </scene>
+        <!--视频通话-->
+        <scene sceneID="L1X-7N-tmM">
+            <objects>
+                <viewController id="cmn-ae-1Dt" customClass="MediaViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vpd-yM-lGI"/>
+                        <viewControllerLayoutGuide type="bottom" id="aGV-x2-Akj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oTh-zw-HRi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iev-7r-96X">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IGc-Ei-Uzr">
+                                        <rect key="frame" x="213.5" y="277.5" width="106.5" height="138.5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="IGc-Ei-Uzr" secondAttribute="trailing" id="1Bf-Dk-Fvy"/>
+                                    <constraint firstAttribute="bottom" secondItem="IGc-Ei-Uzr" secondAttribute="bottom" id="Jy1-3j-kgU"/>
+                                    <constraint firstAttribute="height" secondItem="IGc-Ei-Uzr" secondAttribute="height" multiplier="3" id="h1t-ad-iGj"/>
+                                    <constraint firstAttribute="width" secondItem="IGc-Ei-Uzr" secondAttribute="width" multiplier="3" id="hIj-XC-7Kh"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Iev-7r-96X" secondAttribute="trailing" id="09o-HO-M2V"/>
+                            <constraint firstItem="Iev-7r-96X" firstAttribute="leading" secondItem="oTh-zw-HRi" secondAttribute="leading" id="Cgj-hC-Cn4"/>
+                            <constraint firstItem="Iev-7r-96X" firstAttribute="top" secondItem="vpd-yM-lGI" secondAttribute="bottom" id="D9w-fQ-FCu"/>
+                            <constraint firstItem="aGV-x2-Akj" firstAttribute="top" secondItem="Iev-7r-96X" secondAttribute="bottom" id="KbH-0c-FpY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="视频通话" id="dyo-Jb-F0o">
+                        <barButtonItem key="backBarButtonItem" title=" " id="0m5-YV-mOP"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="localView" destination="IGc-Ei-Uzr" id="X8m-Db-fHy"/>
+                        <outlet property="remoteView" destination="Iev-7r-96X" id="hak-r7-cC9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wmm-B8-48u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="644" y="645"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wPJ-jT-UGy">

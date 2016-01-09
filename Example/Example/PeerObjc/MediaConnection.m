@@ -16,7 +16,7 @@
 #import "RTCPeerConnection.h"
 #import "RTCICECandidate.h"
 
-@interface MediaConnection ()
+@interface MediaConnection ()<RTCEAGLVideoViewDelegate>
 
 @end
 
@@ -27,6 +27,7 @@
     RTCVideoTrack *remoteTrack;
     RTCVideoTrack *localTrack;
     RTCMediaStream *localStream;
+    RTCEAGLVideoView *remoteVideoView;
 }
 
 @synthesize open = _open;
@@ -37,15 +38,10 @@
         self.type = @"media";
         self.id = self.id == nil ? @"mc_phks5x29u9885mi" : self.id;
         NSDictionary *config = options[@"_payload"] ? options[@"_payload"] : @{@"originator": @"true"} ;
+
+    
         
-        float w = [UIScreen mainScreen].bounds.size.width;
-        
-        float h = [UIScreen mainScreen].bounds.size.height;
-        
-        _remoteVideoView = [[VideoView alloc]initWithFrame:CGRectMake(0, 0, w, h) Ratio:CGSizeMake(w, h)];
-        _localVideoView = [[VideoView alloc]initWithFrame:CGRectMake(0.8*w, 0.8*h, 0.2*w, 0.2*h) Ratio:CGSizeMake(w, h)];
-        
-        localStream = [_localVideoView renderVideoWithCamera:2];
+//        localStream = [_localVideoView renderVideoWithCamera:2];
 
         negotiator = [[Negotiator alloc]initWithConnection:self];
         negotiator.stream = localStream;
@@ -76,9 +72,20 @@
     }
 }
 
+- (UIView *)remoteStreamRenderViewForFrame:(CGRect)frame
+{
+    if (!CGRectEqualToRect(frame, remoteVideoView.frame)) {
+        [remoteTrack removeRenderer:remoteVideoView];
+        remoteVideoView = [[RTCEAGLVideoView alloc]initWithFrame:frame];
+        remoteVideoView.delegate = self;
+        [remoteTrack addRenderer:remoteVideoView];
+    }
+    return remoteVideoView;
+}
+
 - (void)recievedRemoteVideoTrack:(RTCVideoTrack *)track
 {
-    [_remoteVideoView renderVideoWithTrack:track];
+    remoteTrack = track;
 }
 
 - (void)setOpen:(BOOL)open

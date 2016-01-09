@@ -12,6 +12,7 @@
 #import "MediaConnection.h"
 #import "Utils.h"
 #import "TextChatViewController.h"
+#import "MediaViewController.h"
 
 @interface ViewController ()
 @property (nonatomic,weak) IBOutlet UITextField *myPeerIdText;
@@ -29,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    p = [[Peer alloc]initWithPeerId:@"123111" options:nil];
+    p = [[Peer alloc]initWithPeerId:@"123122" options:nil];
     
     __weak ViewController *__self = self;
     p.onOpen = ^(NSString *peerId){
@@ -71,11 +72,24 @@
     [self showToast:@"请输入对方的peerID"];
 }
 
+- (IBAction)videoChat:(id)sender
+{
+    if (_otherPeerIdText.text.length) {
+        _mediaConnection = [p callPeer:_otherPeerIdText.text options:@{@"label":@"text",@"serialization":@"none",@"metadata":@{@"message":@"12345"}}];
+        [self performSegueWithIdentifier:@"media" sender:nil];
+        return;
+    }
+    [self showToast:@"请输入对方的peerID"];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"text"]) {
         TextChatViewController *vc = segue.destinationViewController;
         vc.conn = _dataConnection;
+    }else if([segue.identifier isEqualToString:@"media"]){
+        MediaViewController *vc = segue.destinationViewController;
+        vc.conn = _mediaConnection;
     }
 }
 

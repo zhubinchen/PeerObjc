@@ -30,10 +30,8 @@
 
 @property (nonatomic,assign) id<MediaConnectionDelegate> delegate;
 
-@property (nonatomic,strong) VideoView *remoteVideoView;
-
-@property (nonatomic,strong) VideoView *localVideoView;
-
 - (void)recievedRemoteVideoTrack:(RTCVideoTrack*)track;
+
+- (UIView*)remoteStreamRenderViewForFrame:(CGRect)frame;
 
 @end

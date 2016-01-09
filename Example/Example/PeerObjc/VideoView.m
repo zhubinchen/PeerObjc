@@ -81,6 +81,12 @@
     return localStream;
 }
 
+- (void)didMoveToSuperview
+{
+    self.frame = self.superview.bounds;
+    [super didMoveToSuperview];
+}
+
 - (void)setBounds:(CGRect)bounds
 {
     [super setBounds:bounds];
@@ -97,7 +103,6 @@
 {
     _ratio = ratio;
     _videoView.frame = AVMakeRectWithAspectRatioInsideRect(ratio, _videoView.bounds);
-
 }
 - (void)videoView:(RTCEAGLVideoView *)videoView didChangeVideoSize:(CGSize)size
 {

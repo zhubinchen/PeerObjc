@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07600DCD1C4158F8007A7665 /* MediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07600DCC1C4158F8007A7665 /* MediaViewController.m */; };
 		0786C4021C3F57E000012B3F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4011C3F57E000012B3F /* main.m */; };
 		0786C4051C3F57E000012B3F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4041C3F57E000012B3F /* AppDelegate.m */; };
 		0786C4081C3F57E000012B3F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4071C3F57E000012B3F /* ViewController.m */; };
@@ -31,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07600DCB1C4158F8007A7665 /* MediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaViewController.h; sourceTree = "<group>"; };
+		07600DCC1C4158F8007A7665 /* MediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaViewController.m; sourceTree = "<group>"; };
 		0786C3FD1C3F57E000012B3F /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0786C4011C3F57E000012B3F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0786C4031C3F57E000012B3F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -143,6 +146,8 @@
 				0786C4071C3F57E000012B3F /* ViewController.m */,
 				0786C4921C3F754600012B3F /* TextChatViewController.h */,
 				0786C4931C3F754600012B3F /* TextChatViewController.m */,
+				07600DCB1C4158F8007A7665 /* MediaViewController.h */,
+				07600DCC1C4158F8007A7665 /* MediaViewController.m */,
 				0786C4091C3F57E000012B3F /* Main.storyboard */,
 				0786C40C1C3F57E000012B3F /* Assets.xcassets */,
 				0786C40E1C3F57E000012B3F /* LaunchScreen.storyboard */,
@@ -300,6 +305,7 @@
 				0786C4081C3F57E000012B3F /* ViewController.m in Sources */,
 				0786C4891C3F59FF00012B3F /* DataConnection.m in Sources */,
 				0786C48D1C3F59FF00012B3F /* SRWebSocket.m in Sources */,
+				07600DCD1C4158F8007A7665 /* MediaViewController.m in Sources */,
 				0786C4971C3F7A0800012B3F /* Utils.m in Sources */,
 				0786C48E1C3F59FF00012B3F /* VideoView.m in Sources */,
 				0786C4051C3F57E000012B3F /* AppDelegate.m in Sources */,
