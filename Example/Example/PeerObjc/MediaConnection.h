@@ -13,6 +13,11 @@
 
 @class MediaConnection;
 
+typedef enum : NSUInteger {
+    RenderFromLocalCamera,
+    RenderFromRemoteStream,
+} RenderType;
+
 @protocol MediaConnectionDelegate <NSObject>
 
 @optional
@@ -32,6 +37,6 @@
 
 - (void)recievedRemoteVideoTrack:(RTCVideoTrack*)track;
 
-- (UIView*)remoteStreamRenderViewForFrame:(CGRect)frame;
+- (UIView*)renderViewForType:(RenderType)type bounding:(CGRect)bounds;
 
 @end

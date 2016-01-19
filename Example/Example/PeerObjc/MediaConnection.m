@@ -13,7 +13,7 @@
 #import "RTCVideoCapturer.h"
 #import <AVFoundation/AVFoundation.h>
 #import "RTCPeerConnection.h"
-#import "RTCPeerConnection.h"
+#import "ConstraintsFactory.h"
 #import "RTCICECandidate.h"
 
 @interface MediaConnection ()<RTCEAGLVideoViewDelegate>
@@ -24,10 +24,15 @@
 {
     Negotiator *negotiator;
     RTCPeerConnection *pc;
-    RTCVideoTrack *remoteTrack;
-    RTCVideoTrack *localTrack;
+    
+    RTCVideoTrack *remoteVideoTrack;
+    RTCVideoTrack *localVideoTrack;
+    
     RTCMediaStream *localStream;
+    
     RTCEAGLVideoView *remoteVideoView;
+    RTCEAGLVideoView *localVideoView;
+    CGSize radio;
 }
 
 @synthesize open = _open;
@@ -40,9 +45,9 @@
         NSDictionary *config = options[@"_payload"] ? options[@"_payload"] : @{@"originator": @"true"} ;
 
     
+        [self renderVideoWithCamera:FrontCamera];
+        radio = [UIScreen mainScreen].bounds.size;
         
-//        localStream = [_localVideoView renderVideoWithCamera:2];
-
         negotiator = [[Negotiator alloc]initWithConnection:self];
         negotiator.stream = localStream;
         
@@ -53,6 +58,38 @@
     
     return self;
 }
+
+- (void)renderVideoWithCamera:(CameraPostion)camera
+{
+    
+    RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc]init];
+    
+    localStream = [factory mediaStreamWithLabel:@"ARDAMS"];
+    
+    NSString *cameraID = nil;
+    
+    for (AVCaptureDevice *captureDevice in
+         [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]) {
+        
+        if (captureDevice.position == camera) {
+            cameraID = [captureDevice localizedName];
+        }
+    }
+    
+    NSAssert(cameraID, @"Unable to get the camera id");
+    
+    RTCVideoCapturer *capturer = [RTCVideoCapturer capturerWithDeviceName:cameraID];
+    RTCMediaConstraints *mediaConstraints = [ConstraintsFactory constraintsForMediaStream];
+    RTCVideoSource *videoSource = [factory videoSourceWithCapturer:capturer constraints:mediaConstraints];
+    localVideoTrack = [factory videoTrackWithID:@"ARDAMSv0" source:videoSource];
+    
+    if (localVideoTrack) {
+        [localStream addVideoTrack:localVideoTrack];
+    }
+    
+    [localStream addAudioTrack:[factory audioTrackWithID:@"ARDAMSa0"]];
+}
+
 
 - (void)handelMessage:(NSDictionary *)msg
 {
@@ -72,20 +109,31 @@
     }
 }
 
-- (UIView *)remoteStreamRenderViewForFrame:(CGRect)frame
+- (RTCEAGLVideoView*)createRenderViewWithFrame:(CGRect)frame
 {
-    if (!CGRectEqualToRect(frame, remoteVideoView.frame)) {
-        [remoteTrack removeRenderer:remoteVideoView];
-        remoteVideoView = [[RTCEAGLVideoView alloc]initWithFrame:frame];
-        remoteVideoView.delegate = self;
-        [remoteTrack addRenderer:remoteVideoView];
+    RTCEAGLVideoView *videoView = [[RTCEAGLVideoView alloc]initWithFrame:frame];
+    videoView.delegate = self;
+    frame = AVMakeRectWithAspectRatioInsideRect(frame.size, frame);
+    videoView.frame = frame;
+    return videoView;
+}
+
+- (UIView *)renderViewForType:(RenderType)type bounding:(CGRect)bounds
+{
+    if (type == RenderFromLocalCamera) {
+        localVideoView = [self createRenderViewWithFrame:bounds];
+        [localVideoTrack addRenderer:localVideoView];
+        return localVideoView;
+    }else{
+        remoteVideoView = [self createRenderViewWithFrame:bounds];
+        [remoteVideoTrack addRenderer:remoteVideoView];
+        return remoteVideoView;
     }
-    return remoteVideoView;
 }
 
 - (void)recievedRemoteVideoTrack:(RTCVideoTrack *)track
 {
-    remoteTrack = track;
+    remoteVideoTrack = track;
 }
 
 - (void)setOpen:(BOOL)open
@@ -104,6 +152,12 @@
 - (void)setDelegate:(id<MediaConnectionDelegate>)delegate
 {
     _delegate = delegate;
+}
+
+- (void)videoView:(RTCEAGLVideoView *)videoView didChangeVideoSize:(CGSize)size
+{
+    CGRect frame = AVMakeRectWithAspectRatioInsideRect(size, videoView.bounds);
+    videoView.frame = frame;
 }
 
 - (void)close

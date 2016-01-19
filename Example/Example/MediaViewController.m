@@ -24,8 +24,10 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-//    [_localView addSubview:_conn.localVideoView];
-//    [_remoteView addSubview:_conn.remoteVideoView];
+    UIView *l = [_conn renderViewForType:RenderFromLocalCamera bounding:_localView.bounds];
+    UIView *r = [_conn renderViewForType:RenderFromRemoteStream bounding:_remoteView.bounds];
+    [_localView addSubview:l];
+//    [_remoteView addSubview:r];
 }
 
 - (void)didReceiveMemoryWarning {

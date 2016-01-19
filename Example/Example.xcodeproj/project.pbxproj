@@ -34,6 +34,7 @@
 /* Begin PBXFileReference section */
 		07600DCB1C4158F8007A7665 /* MediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaViewController.h; sourceTree = "<group>"; };
 		07600DCC1C4158F8007A7665 /* MediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaViewController.m; sourceTree = "<group>"; };
+		07778FDA1C438305003DF34B /* Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Private.h; sourceTree = "<group>"; };
 		0786C3FD1C3F57E000012B3F /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0786C4011C3F57E000012B3F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0786C4031C3F57E000012B3F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				0786C4981C3FA91F00012B3F /* PeerObjc.h */,
+				07778FDA1C438305003DF34B /* Private.h */,
 				0786C4631C3F59FF00012B3F /* Peer.h */,
 				0786C4641C3F59FF00012B3F /* Peer.m */,
 				0786C4591C3F59FF00012B3F /* Connection.h */,

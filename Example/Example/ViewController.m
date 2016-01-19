@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    p = [[Peer alloc]initWithPeerId:@"123122" options:nil];
+    p = [[Peer alloc]initWithPeerId:@"123111" options:nil];
     
     __weak ViewController *__self = self;
     p.onOpen = ^(NSString *peerId){
@@ -43,16 +43,19 @@
     };
     
     p.onConnection = ^(Connection *conn){
+        NSString *segue;
         if ([conn isKindOfClass:[DataConnection class]]) {
             __self.dataConnection = (DataConnection*)conn;
+            segue = @"text";
         }else{
             __self.mediaConnection = (MediaConnection*)conn;
+            segue = @"media";
         }
         NSString *msg =  [NSString stringWithFormat:@"%@%@",conn.destId,[conn isKindOfClass:[DataConnection class]] ? @"":@""];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.clickedButton = ^(NSInteger buttonIndex,UIAlertView *alertView){
             if (buttonIndex == 1) {
-                [__self performSegueWithIdentifier:@"text" sender:nil];
+                [__self performSegueWithIdentifier:segue sender:nil];
             }else {
                 [conn close];
             }
@@ -75,7 +78,7 @@
 - (IBAction)videoChat:(id)sender
 {
     if (_otherPeerIdText.text.length) {
-        _mediaConnection = [p callPeer:_otherPeerIdText.text options:@{@"label":@"text",@"serialization":@"none",@"metadata":@{@"message":@"12345"}}];
+        _mediaConnection = [p callPeer:_otherPeerIdText.text options:@{@"label":@"chat",@"serialization":@"none",@"metadata":@{@"message":@"12345"}}];
         [self performSegueWithIdentifier:@"media" sender:nil];
         return;
     }
