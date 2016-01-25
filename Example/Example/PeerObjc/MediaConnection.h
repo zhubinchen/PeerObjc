@@ -9,7 +9,7 @@
 #import "Connection.h"
 #import "RTCMediaStream.h"
 #import "RTCVideoTrack.h"
-#import "VideoView.h"
+#import <UIKit/UIKit.h>
 
 @class MediaConnection;
 
@@ -22,9 +22,11 @@ typedef enum : NSUInteger {
 
 @optional
 
-- (void)mediaConnectionDidOpen:(MediaConnection*)connection;
+- (void)mediaConnectionRecievedStream;
 
-- (void)mediaConnectionDidClosed:(MediaConnection*)connection;
+- (void)mediaConnectionDidOpen;
+
+- (void)mediaConnectionClosed;
 
 @end
 
@@ -34,8 +36,6 @@ typedef enum : NSUInteger {
 @interface MediaConnection : Connection
 
 @property (nonatomic,assign) id<MediaConnectionDelegate> delegate;
-
-- (void)recievedRemoteVideoTrack:(RTCVideoTrack*)track;
 
 - (UIView*)renderViewForType:(RenderType)type bounding:(CGRect)bounds;
 

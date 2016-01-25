@@ -13,6 +13,5 @@
 #import "Connection.h"
 #import "DataConnection.h"
 #import "MediaConnection.h"
-#import "VideoView.h"
 
 #endif /* PeerObjc_h */

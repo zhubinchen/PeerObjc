@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SRWebSocket.h"
 #import "DataConnection.h"
 #import "MediaConnection.h"
 
@@ -45,15 +44,6 @@
  *  状态标记
  */
 @property(nonatomic, assign) BOOL        open;
-
-/**
- *  socket
- */
-@property(nonatomic, strong, readonly) SRWebSocket *webSock;
-
-@property(nonatomic, strong, readonly) NSArray    *iceServers;
-
-- (id)init __attribute__((unavailable("not avaliable")));
 
 /**
  *  实例化

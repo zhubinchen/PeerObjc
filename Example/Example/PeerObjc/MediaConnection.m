@@ -6,15 +6,13 @@
 //  Copyright (c) 2015年 zhubch. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+
 #import "MediaConnection.h"
 #import "Negotiator.h"
-#import "RTCEAGLVideoView.h"
-#import "RTCPeerConnectionFactory.h"
-#import "RTCVideoCapturer.h"
-#import <AVFoundation/AVFoundation.h>
-#import "RTCPeerConnection.h"
 #import "ConstraintsFactory.h"
-#import "RTCICECandidate.h"
+#import "WebRTC.h"
+#import "Private.h"
 
 @interface MediaConnection ()<RTCEAGLVideoViewDelegate>
 
@@ -32,7 +30,8 @@
     
     RTCEAGLVideoView *remoteVideoView;
     RTCEAGLVideoView *localVideoView;
-    CGSize radio;
+    
+    RTCPeerConnectionFactory *factory;
 }
 
 @synthesize open = _open;
@@ -41,12 +40,10 @@
 {
     if (self = [super initWithPeer:peer destPeerId:destId options:options]) {
         self.type = @"media";
-        self.id = self.id == nil ? @"mc_phks5x29u9885mi" : self.id;
         NSDictionary *config = options[@"_payload"] ? options[@"_payload"] : @{@"originator": @"true"} ;
 
     
-        [self renderVideoWithCamera:FrontCamera];
-        radio = [UIScreen mainScreen].bounds.size;
+        [self renderVideoWithCamera:2];
         
         negotiator = [[Negotiator alloc]initWithConnection:self];
         negotiator.stream = localStream;
@@ -59,10 +56,10 @@
     return self;
 }
 
-- (void)renderVideoWithCamera:(CameraPostion)camera
+- (void)renderVideoWithCamera:(AVCaptureDevicePosition)cameraPosition
 {
     
-    RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc]init];
+    factory = [[RTCPeerConnectionFactory alloc]init];
     
     localStream = [factory mediaStreamWithLabel:@"ARDAMS"];
     
@@ -71,7 +68,7 @@
     for (AVCaptureDevice *captureDevice in
          [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]) {
         
-        if (captureDevice.position == camera) {
+        if (captureDevice.position == cameraPosition) {
             cameraID = [captureDevice localizedName];
         }
     }
@@ -134,19 +131,24 @@
 - (void)recievedRemoteVideoTrack:(RTCVideoTrack *)track
 {
     remoteVideoTrack = track;
+    if ([self.delegate respondsToSelector:@selector(mediaConnectionRecievedStream)]) {
+        [self.delegate mediaConnectionRecievedStream];
+    }else{
+        NSLog(@"WARMING:Selector not found:mediaConnectionRecievedStream");
+    }
 }
 
 - (void)setOpen:(BOOL)open
 {
     _open = open;
     
-    if (_open && [self.delegate respondsToSelector:@selector(mediaConnectionDidOpen:)]) {
-        [self.delegate mediaConnectionDidOpen:self];
+    if (_open && [self.delegate respondsToSelector:@selector(mediaConnectionDidOpen)]) {
+        [self.delegate mediaConnectionDidOpen];
     }
     
-//    if (!_open && [self.delegate respondsToSelector:@selector(mediaConnectionDidClosed:)]) {
-//        [self.delegate mediaConnectionDidClosed:self];
-//    }
+    if (!_open && [self.delegate respondsToSelector:@selector(mediaConnectionClosed)]) {
+        [self.delegate mediaConnectionClosed];
+    }
 }
 
 - (void)setDelegate:(id<MediaConnectionDelegate>)delegate

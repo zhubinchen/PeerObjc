@@ -8,18 +8,12 @@
 
 #import "Negotiator.h"
 #import "ConstraintsFactory.h"
-#import "RTCPeerConnection.h"
-#import "RTCPeerConnectionFactory.h"
-#import "RTCICECandidate.h"
-#import "RTCDataChannel.h"
-#import "DataConnection.h"
-#import "RTCSessionDescription.h"
-#import "RTCSessionDescriptionDelegate.h"
 #import "Peer.h"
+#import "Private.h"
 
 @interface Negotiator () <RTCPeerConnectionDelegate,RTCSessionDescriptionDelegate>
 
-@property (nonatomic,weak)  Connection *connection;
+@property (nonatomic,weak)   Connection *connection;
 
 @property (nonatomic,strong) RTCPeerConnectionFactory *factory;
 

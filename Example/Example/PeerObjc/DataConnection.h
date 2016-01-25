@@ -34,8 +34,6 @@
 
 @property (nonatomic,assign) id<DataConnectionDelegate> delegate;
 
-- (void)initializeDataChannel:(RTCDataChannel*)dataChannel;
-
 - (BOOL)sendMessage:(NSString*)msg;
 
 - (BOOL)sendData:(NSData *)data;

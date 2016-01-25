@@ -7,8 +7,7 @@
 //
 
 #import "ConstraintsFactory.h"
-#import "RTCPair.h"
-#import "RTCMediaConstraints.h"
+#import "WebRTC.h"
 
 @implementation ConstraintsFactory
 

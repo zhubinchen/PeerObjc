@@ -7,7 +7,8 @@
 //
 
 #import "Connection.h"
-#import "RTCPeerConnection.h"
+#import "WebRTC.h"
+#import "Peer.h"
 
 @implementation Connection
 
@@ -56,12 +57,12 @@
 
 - (void)dealloc
 {
-    NSLog(@"dealloc");
+    NSLog(@"%@:dealloc",self);
 }
 
 - (NSString*)description
 {
-    return [NSString stringWithFormat:@"<connection:%@,dstPeer:%@>",self.id,self.destId];
+    return [NSString stringWithFormat:@"class:%@ <connectionID:%@,srcPeer:%@,dstPeer:%@>",NSStringFromClass([self class]),self.id,self.peer.peerId,self.destId];
 }
 
 @end

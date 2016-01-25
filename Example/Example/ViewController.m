@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    p = [[Peer alloc]initWithPeerId:@"123111" options:nil];
+    p = [[Peer alloc]initWithPeerId:@"123113" options:nil];
     
     __weak ViewController *__self = self;
     p.onOpen = ^(NSString *peerId){

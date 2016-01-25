@@ -7,11 +7,9 @@
 //
 
 #import "DataConnection.h"
-#import "RTCPeerConnection.h"
 #import "Negotiator.h"
-#import "RTCICECandidate.h"
-#import "RTCPeerConnection.h"
-#import "RTCDataChannel.h"
+#import "WebRTC.h"
+#import "Private.h"
 
 @interface DataConnection () <RTCDataChannelDelegate>
 

@@ -8,7 +8,7 @@
 
 #import "MediaViewController.h"
 
-@interface MediaViewController ()
+@interface MediaViewController ()<MediaConnectionDelegate>
 
 @property (nonatomic,weak) IBOutlet UIView *localView;
 @property (nonatomic,weak) IBOutlet UIView *remoteView;
@@ -22,12 +22,17 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)mediaConnectionRecievedStream
+{
+    UIView *r = [_conn renderViewForType:RenderFromRemoteStream bounding:_remoteView.bounds];
+    [_remoteView addSubview:r];
+}
+
+- (void)viewWillAppear:(BOOL)animated
 {
     UIView *l = [_conn renderViewForType:RenderFromLocalCamera bounding:_localView.bounds];
-    UIView *r = [_conn renderViewForType:RenderFromRemoteStream bounding:_remoteView.bounds];
+
     [_localView addSubview:l];
-//    [_remoteView addSubview:r];
 }
 
 - (void)didReceiveMemoryWarning {

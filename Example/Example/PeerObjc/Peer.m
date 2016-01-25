@@ -7,39 +7,25 @@
 //
 
 #import "Peer.h"
-#import "RTCICEServer.h"
-#import "RTCMediaConstraints.h"
-#import "RTCMediaStream.h"
-#import "RTCPair.h"
-#import "RTCPeerConnection.h"
-#import "RTCPeerConnectionDelegate.h"
-#import "RTCPeerConnectionFactory.h"
-#import "RTCSessionDescriptionDelegate.h"
-#import "RTCVideoCapturer.h"
-#import "RTCVideoTrack.h"
-#import "RTCICECandidate.h"
-#import "RTCDataChannel.h"
-#import "RTCSessionDescription.h"
-#import "RTCTypes.h"
-#import "RTCEAGLVideoView.h"
+#import "WebRTC.h"
+#import "Private.h"
 
-#define kMessageQueueCapacity 10
 #define kDefaultHost @"0.peerjs.com"
 #define kDefaultPath @"/"
 #define kDefaultKey @"lwjd5qra8257b9"
 
-#define kWsURLTemplate @"%@://%@:%ld%@/peerjs?key=%@&id=%@&token=%@"
 #define kDefaultSTUNServerUrl @"stun:stun.l.google.com:19302"
 
 @interface Peer () <SRWebSocketDelegate>
-/**
- *  以下是options内容
- */
+
 @property(nonatomic, strong) NSString   *key;
 @property(nonatomic, strong) NSString   *host;
 @property(nonatomic, strong) NSString   *path;
 @property(nonatomic, assign) BOOL       secure;
 @property(nonatomic, strong) NSString   *port;
+
+@property(nonatomic, strong) NSArray    *iceServers;
+@property(nonatomic, strong) SRWebSocket *webSock;
 
 @end
 
@@ -48,6 +34,10 @@
     RTCPeerConnectionFactory *factory;
     NSMutableArray *messageQueue;
     NSMutableDictionary *connections;
+}
+
+- (instancetype)init{
+    return [self initWithPeerId:nil options:nil];
 }
 
 - (instancetype)initWithPeerId:(NSString *)peerId options:(NSDictionary *)options
@@ -137,7 +127,6 @@
     NSString *urlStr = [NSString stringWithFormat:@"%@://%@:%@%@/peerjs?key=%@&id=%@&token=%@",
                         proto, _host,  _port, _path, _key, _peerId, token];
     NSLog(@"%@",urlStr);
-//    urlStr = @"ws://0.peerjs.com:9000/peerjs?key=lwjd5qra8257b9&id=vtlouq3g0evcxr&token=ixkdittzusiaxpqkzesoahnzsrqlfwdpvo";
     
     _webSock = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlStr]];
     _webSock.delegate = self;
