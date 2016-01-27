@@ -10,6 +10,20 @@
 #import "DataConnection.h"
 #import "MediaConnection.h"
 
+@protocol PeerDelegate <NSObject>
+
+- (void)peerDidOpen;
+
+- (void)peerDidClosed;
+
+- (void)peerDidRecievedDataConnection:(DataConnection*)dataConn;
+
+- (void)peerDidRecievedMediaConnection:(MediaConnection*)mediaConn;
+
+- (void)peerDidError:(NSError*)err;
+
+@end
+
 /**
  *  代表一个端
  */

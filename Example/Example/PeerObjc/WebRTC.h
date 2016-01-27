@@ -9,20 +9,20 @@
 #ifndef WebRTC_h
 #define WebRTC_h
 
-#import "RTCICEServer.h"
-#import "RTCMediaConstraints.h"
-#import "RTCMediaStream.h"
-#import "RTCPair.h"
-#import "RTCPeerConnection.h"
-#import "RTCPeerConnectionDelegate.h"
-#import "RTCPeerConnectionFactory.h"
-#import "RTCSessionDescriptionDelegate.h"
-#import "RTCVideoCapturer.h"
-#import "RTCVideoTrack.h"
-#import "RTCICECandidate.h"
-#import "RTCDataChannel.h"
-#import "RTCSessionDescription.h"
-#import "RTCTypes.h"
-#import "RTCEAGLVideoView.h"
+#import <WebRTC/RTCMediaStream.h>
+#import <WebRTC/RTCVideoTrack.h>
+#import <WebRTC/RTCICEServer.h>
+#import <WebRTC/RTCMediaConstraints.h>
+#import <WebRTC/RTCPair.h>
+#import <WebRTC/RTCPeerConnection.h>
+#import <WebRTC/RTCPeerConnectionDelegate.h>
+#import <WebRTC/RTCPeerConnectionFactory.h>
+#import <WebRTC/RTCSessionDescriptionDelegate.h>
+#import <WebRTC/RTCVideoCapturer.h>
+#import <WebRTC/RTCICECandidate.h>
+#import <WebRTC/RTCDataChannel.h>
+#import <WebRTC/RTCSessionDescription.h>
+#import <WebRTC/RTCTypes.h>
+#import <WebRTC/RTCEAGLVideoView.h>
 
 #endif /* WebRTC_h */

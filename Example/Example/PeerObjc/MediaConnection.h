@@ -7,8 +7,6 @@
 //
 
 #import "Connection.h"
-#import "RTCMediaStream.h"
-#import "RTCVideoTrack.h"
 #import <UIKit/UIKit.h>
 
 @class MediaConnection;
