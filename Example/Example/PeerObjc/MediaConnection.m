@@ -146,8 +146,8 @@
         [self.delegate mediaConnectionDidOpen];
     }
     
-    if (!_open && [self.delegate respondsToSelector:@selector(mediaConnectionClosed)]) {
-        [self.delegate mediaConnectionClosed];
+    if (!_open && [self.delegate respondsToSelector:@selector(mediaConnectionDidClosed)]) {
+        [self.delegate mediaConnectionDidClosed];
     }
 }
 

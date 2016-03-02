@@ -7,6 +7,7 @@
 //
 
 #import "MediaViewController.h"
+#import <MapKit/MapKit.h>
 
 @interface MediaViewController ()<MediaConnectionDelegate>
 
@@ -19,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
 }
 

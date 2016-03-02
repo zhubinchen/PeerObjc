@@ -24,7 +24,7 @@ typedef enum : NSUInteger {
 
 - (void)mediaConnectionDidOpen;
 
-- (void)mediaConnectionClosed;
+- (void)mediaConnectionDidClosed;
 
 @end
 

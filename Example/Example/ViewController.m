@@ -14,6 +14,8 @@
 #import "TextChatViewController.h"
 #import "MediaViewController.h"
 
+#import <VideoToolbox/VideoToolbox.h>
+
 @interface ViewController ()
 @property (nonatomic,weak) IBOutlet UITextField *myPeerIdText;
 @property (nonatomic,weak) IBOutlet UITextField *otherPeerIdText;
