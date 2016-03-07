@@ -17,24 +17,23 @@
 		0786C4531C3F598800012B3F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C4521C3F598800012B3F /* GLKit.framework */; };
 		0786C4551C3F599300012B3F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C4541C3F599300012B3F /* libstdc++.tbd */; };
 		0786C4571C3F599A00012B3F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C4561C3F599A00012B3F /* libsqlite3.tbd */; };
-		0786C4871C3F59FF00012B3F /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C45A1C3F59FF00012B3F /* Connection.m */; };
-		0786C4881C3F59FF00012B3F /* ConstraintsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C45C1C3F59FF00012B3F /* ConstraintsFactory.m */; };
-		0786C4891C3F59FF00012B3F /* DataConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C45E1C3F59FF00012B3F /* DataConnection.m */; };
-		0786C48A1C3F59FF00012B3F /* MediaConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4601C3F59FF00012B3F /* MediaConnection.m */; };
-		0786C48B1C3F59FF00012B3F /* Negotiator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4621C3F59FF00012B3F /* Negotiator.m */; };
-		0786C48C1C3F59FF00012B3F /* Peer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4641C3F59FF00012B3F /* Peer.m */; };
 		0786C4911C3F5AA000012B3F /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0786C4901C3F5AA000012B3F /* libicucore.tbd */; };
 		0786C4941C3F754600012B3F /* TextChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4931C3F754600012B3F /* TextChatViewController.m */; };
 		0786C4971C3F7A0800012B3F /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0786C4961C3F7A0800012B3F /* Utils.m */; };
-		07CE48B21C585FF900DC2AFD /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CE48B11C585FF900DC2AFD /* WebRTC.framework */; };
 		07CE48B41C58618200DC2AFD /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CE48B31C58618200DC2AFD /* VideoToolbox.framework */; };
-		07CE48B71C586F0900DC2AFD /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CE48B61C586F0900DC2AFD /* SRWebSocket.m */; };
+		07CFDA051C8D7D86009E815A /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CFD9F31C8D7D86009E815A /* Connection.m */; };
+		07CFDA061C8D7D86009E815A /* ConstraintsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CFD9F51C8D7D86009E815A /* ConstraintsFactory.m */; };
+		07CFDA071C8D7D86009E815A /* DataConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CFD9F71C8D7D86009E815A /* DataConnection.m */; };
+		07CFDA081C8D7D86009E815A /* MediaConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CFD9F91C8D7D86009E815A /* MediaConnection.m */; };
+		07CFDA091C8D7D86009E815A /* Negotiator.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CFD9FB1C8D7D86009E815A /* Negotiator.m */; };
+		07CFDA0A1C8D7D86009E815A /* Peer.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CFD9FD1C8D7D86009E815A /* Peer.m */; };
+		07CFDA0B1C8D7D86009E815A /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CFDA011C8D7D86009E815A /* SRWebSocket.m */; };
+		07CFDA0C1C8D7D86009E815A /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFDA031C8D7D86009E815A /* WebRTC.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		07600DCB1C4158F8007A7665 /* MediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaViewController.h; sourceTree = "<group>"; };
 		07600DCC1C4158F8007A7665 /* MediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaViewController.m; sourceTree = "<group>"; };
-		07778FDA1C438305003DF34B /* Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Private.h; sourceTree = "<group>"; };
 		0786C3FD1C3F57E000012B3F /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0786C4011C3F57E000012B3F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0786C4031C3F57E000012B3F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -48,29 +47,30 @@
 		0786C4521C3F598800012B3F /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		0786C4541C3F599300012B3F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		0786C4561C3F599A00012B3F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		0786C4591C3F59FF00012B3F /* Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connection.h; sourceTree = "<group>"; };
-		0786C45A1C3F59FF00012B3F /* Connection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Connection.m; sourceTree = "<group>"; };
-		0786C45B1C3F59FF00012B3F /* ConstraintsFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintsFactory.h; sourceTree = "<group>"; };
-		0786C45C1C3F59FF00012B3F /* ConstraintsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstraintsFactory.m; sourceTree = "<group>"; };
-		0786C45D1C3F59FF00012B3F /* DataConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataConnection.h; sourceTree = "<group>"; };
-		0786C45E1C3F59FF00012B3F /* DataConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataConnection.m; sourceTree = "<group>"; };
-		0786C45F1C3F59FF00012B3F /* MediaConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaConnection.h; sourceTree = "<group>"; };
-		0786C4601C3F59FF00012B3F /* MediaConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaConnection.m; sourceTree = "<group>"; };
-		0786C4611C3F59FF00012B3F /* Negotiator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Negotiator.h; sourceTree = "<group>"; };
-		0786C4621C3F59FF00012B3F /* Negotiator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Negotiator.m; sourceTree = "<group>"; };
-		0786C4631C3F59FF00012B3F /* Peer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Peer.h; sourceTree = "<group>"; };
-		0786C4641C3F59FF00012B3F /* Peer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Peer.m; sourceTree = "<group>"; };
 		0786C4901C3F5AA000012B3F /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		0786C4921C3F754600012B3F /* TextChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextChatViewController.h; sourceTree = "<group>"; };
 		0786C4931C3F754600012B3F /* TextChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextChatViewController.m; sourceTree = "<group>"; };
 		0786C4951C3F7A0800012B3F /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		0786C4961C3F7A0800012B3F /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
-		0786C4981C3FA91F00012B3F /* PeerObjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeerObjc.h; sourceTree = "<group>"; };
-		07CE48B11C585FF900DC2AFD /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
 		07CE48B31C58618200DC2AFD /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
-		07CE48B51C586F0900DC2AFD /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
-		07CE48B61C586F0900DC2AFD /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
-		07F029D61C4F724000D5C5BE /* WebRTC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebRTC.h; sourceTree = "<group>"; };
+		07CFD9F21C8D7D86009E815A /* Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connection.h; sourceTree = "<group>"; };
+		07CFD9F31C8D7D86009E815A /* Connection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Connection.m; sourceTree = "<group>"; };
+		07CFD9F41C8D7D86009E815A /* ConstraintsFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintsFactory.h; sourceTree = "<group>"; };
+		07CFD9F51C8D7D86009E815A /* ConstraintsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstraintsFactory.m; sourceTree = "<group>"; };
+		07CFD9F61C8D7D86009E815A /* DataConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataConnection.h; sourceTree = "<group>"; };
+		07CFD9F71C8D7D86009E815A /* DataConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataConnection.m; sourceTree = "<group>"; };
+		07CFD9F81C8D7D86009E815A /* MediaConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaConnection.h; sourceTree = "<group>"; };
+		07CFD9F91C8D7D86009E815A /* MediaConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaConnection.m; sourceTree = "<group>"; };
+		07CFD9FA1C8D7D86009E815A /* Negotiator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Negotiator.h; sourceTree = "<group>"; };
+		07CFD9FB1C8D7D86009E815A /* Negotiator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Negotiator.m; sourceTree = "<group>"; };
+		07CFD9FC1C8D7D86009E815A /* Peer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Peer.h; sourceTree = "<group>"; };
+		07CFD9FD1C8D7D86009E815A /* Peer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Peer.m; sourceTree = "<group>"; };
+		07CFD9FE1C8D7D86009E815A /* PeerObjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeerObjc.h; sourceTree = "<group>"; };
+		07CFD9FF1C8D7D86009E815A /* Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Private.h; sourceTree = "<group>"; };
+		07CFDA001C8D7D86009E815A /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		07CFDA011C8D7D86009E815A /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		07CFDA031C8D7D86009E815A /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
+		07CFDA041C8D7D86009E815A /* WebRTC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRTC.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +83,7 @@
 				0786C4571C3F599A00012B3F /* libsqlite3.tbd in Frameworks */,
 				0786C4551C3F599300012B3F /* libstdc++.tbd in Frameworks */,
 				0786C4531C3F598800012B3F /* GLKit.framework in Frameworks */,
-				07CE48B21C585FF900DC2AFD /* WebRTC.framework in Frameworks */,
+				07CFDA0C1C8D7D86009E815A /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +115,7 @@
 		0786C3FF1C3F57E000012B3F /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				0786C4581C3F59FF00012B3F /* PeerObjc */,
+				07CFD9F11C8D7D86009E815A /* PeerObjc */,
 				0786C4951C3F7A0800012B3F /* Utils.h */,
 				0786C4961C3F7A0800012B3F /* Utils.m */,
 				0786C4031C3F57E000012B3F /* AppDelegate.h */,
@@ -143,35 +143,35 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0786C4581C3F59FF00012B3F /* PeerObjc */ = {
+		07CFD9F11C8D7D86009E815A /* PeerObjc */ = {
 			isa = PBXGroup;
 			children = (
-				0786C4981C3FA91F00012B3F /* PeerObjc.h */,
-				07778FDA1C438305003DF34B /* Private.h */,
-				07F029D61C4F724000D5C5BE /* WebRTC.h */,
-				0786C4631C3F59FF00012B3F /* Peer.h */,
-				0786C4641C3F59FF00012B3F /* Peer.m */,
-				0786C4591C3F59FF00012B3F /* Connection.h */,
-				0786C45A1C3F59FF00012B3F /* Connection.m */,
-				0786C45B1C3F59FF00012B3F /* ConstraintsFactory.h */,
-				0786C45C1C3F59FF00012B3F /* ConstraintsFactory.m */,
-				0786C45D1C3F59FF00012B3F /* DataConnection.h */,
-				0786C45E1C3F59FF00012B3F /* DataConnection.m */,
-				0786C45F1C3F59FF00012B3F /* MediaConnection.h */,
-				0786C4601C3F59FF00012B3F /* MediaConnection.m */,
-				0786C4611C3F59FF00012B3F /* Negotiator.h */,
-				0786C4621C3F59FF00012B3F /* Negotiator.m */,
-				07CE48B51C586F0900DC2AFD /* SRWebSocket.h */,
-				07CE48B61C586F0900DC2AFD /* SRWebSocket.m */,
-				0786C46B1C3F59FF00012B3F /* WebRTC */,
+				07CFD9F21C8D7D86009E815A /* Connection.h */,
+				07CFD9F31C8D7D86009E815A /* Connection.m */,
+				07CFD9F41C8D7D86009E815A /* ConstraintsFactory.h */,
+				07CFD9F51C8D7D86009E815A /* ConstraintsFactory.m */,
+				07CFD9F61C8D7D86009E815A /* DataConnection.h */,
+				07CFD9F71C8D7D86009E815A /* DataConnection.m */,
+				07CFD9F81C8D7D86009E815A /* MediaConnection.h */,
+				07CFD9F91C8D7D86009E815A /* MediaConnection.m */,
+				07CFD9FA1C8D7D86009E815A /* Negotiator.h */,
+				07CFD9FB1C8D7D86009E815A /* Negotiator.m */,
+				07CFD9FC1C8D7D86009E815A /* Peer.h */,
+				07CFD9FD1C8D7D86009E815A /* Peer.m */,
+				07CFD9FE1C8D7D86009E815A /* PeerObjc.h */,
+				07CFD9FF1C8D7D86009E815A /* Private.h */,
+				07CFDA001C8D7D86009E815A /* SRWebSocket.h */,
+				07CFDA011C8D7D86009E815A /* SRWebSocket.m */,
+				07CFDA021C8D7D86009E815A /* WebRTC */,
+				07CFDA041C8D7D86009E815A /* WebRTC.h */,
 			);
 			path = PeerObjc;
 			sourceTree = "<group>";
 		};
-		0786C46B1C3F59FF00012B3F /* WebRTC */ = {
+		07CFDA021C8D7D86009E815A /* WebRTC */ = {
 			isa = PBXGroup;
 			children = (
-				07CE48B11C585FF900DC2AFD /* WebRTC.framework */,
+				07CFDA031C8D7D86009E815A /* WebRTC.framework */,
 			);
 			path = WebRTC;
 			sourceTree = "<group>";
@@ -246,19 +246,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07CFDA091C8D7D86009E815A /* Negotiator.m in Sources */,
 				0786C4081C3F57E000012B3F /* ViewController.m in Sources */,
-				0786C4891C3F59FF00012B3F /* DataConnection.m in Sources */,
+				07CFDA051C8D7D86009E815A /* Connection.m in Sources */,
 				07600DCD1C4158F8007A7665 /* MediaViewController.m in Sources */,
-				07CE48B71C586F0900DC2AFD /* SRWebSocket.m in Sources */,
 				0786C4971C3F7A0800012B3F /* Utils.m in Sources */,
+				07CFDA0A1C8D7D86009E815A /* Peer.m in Sources */,
 				0786C4051C3F57E000012B3F /* AppDelegate.m in Sources */,
-				0786C48B1C3F59FF00012B3F /* Negotiator.m in Sources */,
-				0786C48A1C3F59FF00012B3F /* MediaConnection.m in Sources */,
-				0786C48C1C3F59FF00012B3F /* Peer.m in Sources */,
 				0786C4021C3F57E000012B3F /* main.m in Sources */,
-				0786C4881C3F59FF00012B3F /* ConstraintsFactory.m in Sources */,
-				0786C4871C3F59FF00012B3F /* Connection.m in Sources */,
+				07CFDA081C8D7D86009E815A /* MediaConnection.m in Sources */,
 				0786C4941C3F754600012B3F /* TextChatViewController.m in Sources */,
+				07CFDA071C8D7D86009E815A /* DataConnection.m in Sources */,
+				07CFDA0B1C8D7D86009E815A /* SRWebSocket.m in Sources */,
+				07CFDA061C8D7D86009E815A /* ConstraintsFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

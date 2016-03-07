@@ -7,30 +7,34 @@
 //
 
 #import "Connection.h"
-#import "RTCMediaStream.h"
-#import "RTCVideoTrack.h"
-#import "VideoView.h"
+#import <UIKit/UIKit.h>
 
 @class MediaConnection;
+
+typedef enum : NSUInteger {
+    RenderFromLocalCamera,
+    RenderFromRemoteStream,
+} RenderType;
 
 @protocol MediaConnectionDelegate <NSObject>
 
 @optional
 
-- (void)mediaConnectionDidOpen:(MediaConnection*)connection;
+- (void)mediaConnectionRecievedStream;
 
-- (void)mediaConnectionDidClosed:(MediaConnection*)connection;
+- (void)mediaConnectionDidOpen;
+
+- (void)mediaConnectionDidClosed;
 
 @end
 
+/**
+ *  视频通话用的连接
+ */
 @interface MediaConnection : Connection
 
 @property (nonatomic,assign) id<MediaConnectionDelegate> delegate;
 
-@property (nonatomic,strong) VideoView *remoteVideoView;
-
-@property (nonatomic,strong) VideoView *localVideoView;
-
-- (void)recievedRemoteVideoTrack:(RTCVideoTrack*)track;
+- (UIView*)renderViewForType:(RenderType)type bounding:(CGRect)bounds;
 
 @end

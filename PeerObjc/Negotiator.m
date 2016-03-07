@@ -8,18 +8,12 @@
 
 #import "Negotiator.h"
 #import "ConstraintsFactory.h"
-#import "RTCPeerConnection.h"
-#import "RTCPeerConnectionFactory.h"
-#import "RTCICECandidate.h"
-#import "RTCDataChannel.h"
-#import "DataConnection.h"
-#import "RTCSessionDescription.h"
-#import "RTCSessionDescriptionDelegate.h"
 #import "Peer.h"
+#import "Private.h"
 
 @interface Negotiator () <RTCPeerConnectionDelegate,RTCSessionDescriptionDelegate>
 
-@property (nonatomic,weak)  Connection *connection;
+@property (nonatomic,weak)   Connection *connection;
 
 @property (nonatomic,strong) RTCPeerConnectionFactory *factory;
 
@@ -98,7 +92,7 @@
 {
     NSDictionary *message = @{@"type": @"OFFER",
                               @"src": _connection.peer.peerId,
-                              @"dest": _connection.destId,
+                              @"dst": _connection.destId,
                               @"payload":
                                   @{@"browser": @"Chrome",
                                     @"serialization": _connection.serialization,
@@ -121,7 +115,7 @@
     NSLog(@"%@",sdp);
     [self sendMessage:@{@"type": @"ANSWER",
                               @"src": _connection.peer.peerId,
-                              @"dest": _connection.destId,
+                              @"dst": _connection.destId,
                               @"payload":
                                   @{@"browser": @"Chrome",
                                     @"serialization": @"binary",
@@ -147,7 +141,7 @@
 
 - (void)handelSdp:(NSDictionary*)sdpDic withType:(NSString*)type
 {
-    RTCSessionDescription *sdp = [[RTCSessionDescription alloc]initwithType:type sdp:sdpDic[@"sdp"]];
+    RTCSessionDescription *sdp = [[RTCSessionDescription alloc]initWithType:type sdp:sdpDic[@"sdp"]];
     sdpType = type;
     where = @"remote";
     [_peerConnection setRemoteDescriptionWithDelegate:self sessionDescription:sdp];
@@ -168,8 +162,7 @@
 
 #pragma mark - RTCSessionDescriptionDelegate
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-didCreateSessionDescription:(RTCSessionDescription *)sdp
+- (void)peerConnection:(RTCPeerConnection *)peerConnection didCreateSessionDescription:(RTCSessionDescription *)sdp
                  error:(NSError *)error {
     if (error) {
         NSLog(@"failed to createSDP,error:%@",error);
@@ -181,8 +174,7 @@ didCreateSessionDescription:(RTCSessionDescription *)sdp
     [_peerConnection setLocalDescriptionWithDelegate:self sessionDescription:sdp];
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-didSetSessionDescriptionWithError:(NSError *)error {
+- (void)peerConnection:(RTCPeerConnection *)peerConnection didSetSessionDescriptionWithError:(NSError *)error {
     if (error) {
         NSLog(@"Failed to set %@Description:%@ Error:%@",where,sdpType,error);
         return;
@@ -209,7 +201,7 @@ didSetSessionDescriptionWithError:(NSError *)error {
     
     [self sendMessage:@{@"type": @"CANDIDATE",
                                      @"src": _connection.peer.peerId,
-                                     @"dest": _connection.destId,
+                                     @"dst": _connection.destId,
                                      @"payload": @{
                                              @"type": _connection.type,
                                              @"connectionId": _connection.id,

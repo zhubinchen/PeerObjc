@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-
 @class Peer;
 
 /**
- *  不要实例化这个类。请用他的子类
+ *  定义了连接的通用属性和方法
  */
 @interface Connection : NSObject
 

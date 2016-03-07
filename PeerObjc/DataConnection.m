@@ -7,11 +7,9 @@
 //
 
 #import "DataConnection.h"
-#import "RTCPeerConnection.h"
 #import "Negotiator.h"
-#import "RTCICECandidate.h"
-#import "RTCPeerConnection.h"
-#import "RTCDataChannel.h"
+#import "WebRTC.h"
+#import "Private.h"
 
 @interface DataConnection () <RTCDataChannelDelegate>
 
@@ -71,14 +69,14 @@
     return [_dataChannel sendData:buffer];
 }
 
-- (void)sendMessage:(NSDictionary *)msg
+- (BOOL)sendMessage:(NSString *)msg
 {
     if (!self.open) {
-        return ;
+        return NO;
     }
     
-    RTCDataBuffer *buffer = [[RTCDataBuffer alloc]initWithData:[NSJSONSerialization dataWithJSONObject:msg options:0 error:nil] isBinary:NO];
-    [_dataChannel sendData:buffer];
+    RTCDataBuffer *buffer = [[RTCDataBuffer alloc]initWithData:[msg dataUsingEncoding:NSUTF8StringEncoding] isBinary:NO];
+    return [_dataChannel sendData:buffer];
 }
 
 #pragma mark RTCDataChannelDelegate
@@ -112,8 +110,8 @@
     } else {
         
         if ([self.delegate respondsToSelector:@selector(dataConnection:didRecievedMessage:)]) {
-
-            [self.delegate dataConnection:self didRecievedMessage:[NSJSONSerialization JSONObjectWithData:buffer.data options:0 error:nil]];
+            NSString *msg = [[NSString alloc]initWithData:buffer.data encoding:NSUTF8StringEncoding];
+            [self.delegate dataConnection:self didRecievedMessage:msg];
         }
     }
 }

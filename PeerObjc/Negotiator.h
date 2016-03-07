@@ -8,13 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "Connection.h"
-
-@class RTCMediaStream;
-@class RTCPeerConnection;
-@class RTCICECandidate;
+#import "WebRTC.h"
 
 /**
- *  负责处理各种offer。answer。建立连接
+ *  负责处理各种SDP,为两个Peer建立起连接
  */
 @interface Negotiator : NSObject
 
@@ -24,7 +21,7 @@
 
 - (RTCPeerConnection*)startPeerConnectionWithOptions:(NSDictionary*)options;
 
-- (id)init __attribute__((unavailable("not avaliable")));
+- (instancetype)init __attribute__((unavailable("not avaliable")));
 
 - (void)handleCandidate:(RTCICECandidate*)candidate;
 

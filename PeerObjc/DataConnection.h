@@ -21,19 +21,20 @@
 
 - (void)dataConnection:(DataConnection *)connection didRecievedData:(NSData *)data;
 
-- (void)dataConnection:(DataConnection *)connection didRecievedMessage:(NSDictionary*)msg;
+- (void)dataConnection:(DataConnection *)connection didRecievedMessage:(NSString*)msg;
 
 @end
 
+/**
+ *  传输二进制数据和文本消息用的连接
+ */
 @interface DataConnection : Connection
 
 @property (nonatomic,strong,readonly) NSData *recivedData;
 
 @property (nonatomic,assign) id<DataConnectionDelegate> delegate;
 
-- (void)initializeDataChannel:(RTCDataChannel*)dataChannel;
-
-- (void)sendMessage:(NSDictionary*)msg;
+- (BOOL)sendMessage:(NSString*)msg;
 
 - (BOOL)sendData:(NSData *)data;
 
