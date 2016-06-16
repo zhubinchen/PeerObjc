@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DataConnection.h"
+#import <PeerObjc/PeerObjc.h>
 
 @interface TextChatViewController : UIViewController
 
-@property (nonatomic,weak) DataConnection *conn;
+@property (nonatomic,weak) ZHDataConnection *conn;
 
 @end

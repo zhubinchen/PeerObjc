@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PeerObjc.h"
+#import <PeerObjc/PeerObjc.h>
 
 @interface MediaViewController : UIViewController
-@property (nonatomic,weak) MediaConnection *conn;
+@property (nonatomic,weak) ZHMediaConnection *conn;
 @end

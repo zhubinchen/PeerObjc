@@ -7,9 +7,9 @@
 //
 
 #import "TextChatViewController.h"
-#import "Utils.h"
+#import "ZHUtils.h"
 
-@interface TextChatViewController () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,DataConnectionDelegate>
+@interface TextChatViewController () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,ZHDataConnectionDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomSpace;
 @property (nonatomic,weak) IBOutlet UITableView *messageTableView;
@@ -50,12 +50,12 @@
     return YES;
 }
 
-- (void)dataConnectionDidOpen:(DataConnection *)connection
+- (void)dataConnectionDidOpen:(ZHDataConnection *)connection
 {
     NSLog(@"connection opened");
 }
 
-- (void)dataConnection:(DataConnection *)connection didRecievedMessage:(NSString *)msg
+- (void)dataConnection:(ZHDataConnection *)connection didRecievedMessage:(NSString *)msg
 {
     [messages addObject:@{@"fromSelf":@(NO),@"message":msg}];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -72,7 +72,7 @@
         [_messageTableView reloadData];
         [_messageInput resignFirstResponder];
     }else{
-        [self showToast:@"请输入要发送的内容"];
+        showToast(@"请输入要发送的内容");
     }
 }
 

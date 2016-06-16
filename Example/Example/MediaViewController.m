@@ -9,7 +9,7 @@
 #import "MediaViewController.h"
 #import <MapKit/MapKit.h>
 
-@interface MediaViewController ()<MediaConnectionDelegate>
+@interface MediaViewController ()<ZHMediaConnectionDelegate>
 
 @property (nonatomic,weak) IBOutlet UIView *localView;
 @property (nonatomic,weak) IBOutlet UIView *remoteView;

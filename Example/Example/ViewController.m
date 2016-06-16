@@ -7,10 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "Peer.h"
-#import "DataConnection.h"
-#import "MediaConnection.h"
-#import "Utils.h"
+#import <PeerObjc/PeerObjc.h>
+#import "ZHUtils.h"
 #import "TextChatViewController.h"
 #import "MediaViewController.h"
 
@@ -19,20 +17,20 @@
 @interface ViewController ()
 @property (nonatomic,weak) IBOutlet UITextField *myPeerIdText;
 @property (nonatomic,weak) IBOutlet UITextField *otherPeerIdText;
-@property (nonatomic,strong) DataConnection *dataConnection;
-@property (nonatomic,strong) MediaConnection *mediaConnection;
+@property (nonatomic,strong) ZHDataConnection *dataConnection;
+@property (nonatomic,strong) ZHMediaConnection *mediaConnection;
 
 @end
 
 @implementation ViewController
 {
-    Peer *p;
+    ZHPeer *p;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    p = [[Peer alloc]initWithPeerId:@"123113" options:nil];
+    p = [[ZHPeer alloc]initWithPeerId:@"123113" options:nil];
     
     __weak ViewController *__self = self;
     p.onOpen = ^(NSString *peerId){
@@ -46,14 +44,14 @@
     
     p.onConnection = ^(Connection *conn){
         NSString *segue;
-        if ([conn isKindOfClass:[DataConnection class]]) {
-            __self.dataConnection = (DataConnection*)conn;
+        if ([conn isKindOfClass:[ZHDataConnection class]]) {
+            __self.dataConnection = (ZHDataConnection*)conn;
             segue = @"text";
         }else{
-            __self.mediaConnection = (MediaConnection*)conn;
+            __self.mediaConnection = (ZHMediaConnection*)conn;
             segue = @"media";
         }
-        NSString *msg =  [NSString stringWithFormat:@"%@%@",conn.destId,[conn isKindOfClass:[DataConnection class]] ? @"":@""];
+        NSString *msg =  [NSString stringWithFormat:@"%@%@",conn.destId,[conn isKindOfClass:[ZHDataConnection class]] ? @"":@""];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.clickedButton = ^(NSInteger buttonIndex,UIAlertView *alertView){
             if (buttonIndex == 1) {
@@ -61,7 +59,6 @@
             }else {
                 [conn close];
             }
-            [alertView releaseBlock];
         };
         [alert show];
     };
@@ -74,7 +71,7 @@
         [self performSegueWithIdentifier:@"text" sender:nil];
         return;
     }
-    [self showToast:@"请输入对方的peerID"];
+    showToast(@"请输入对方的peerID");
 }
 
 - (IBAction)videoChat:(id)sender
@@ -84,7 +81,7 @@
         [self performSegueWithIdentifier:@"media" sender:nil];
         return;
     }
-    [self showToast:@"请输入对方的peerID"];
+    showToast(@"请输入对方的peerID");
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
